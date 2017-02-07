@@ -1,4 +1,15 @@
+/** Plugin settings **/
+
+var jsOutputFile = 'dist/accordion.min.js';
+var cssOutputFile = 'dist/accordion.css';
+
+
+
+/** Webpack configuration **/
+
 var webpack = require("webpack");
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var extractCSS = new ExtractTextPlugin(cssOutputFile);
 
 module.exports = {
 	// application entry file
@@ -7,12 +18,12 @@ module.exports = {
 	// bundled application output file
 	output: {
 		path: __dirname,
-		filename: "/dist/boilerplate.min.js"
+		filename: jsOutputFile
 	},
 
 	// Currently we need to add '.ts' to the resolve.extensions array.
 	resolve: {
-		extensions: ['', '.ts']
+		extensions: ['.ts']
 	},
 
 	// Source maps support ('inline-source-map' also works)
@@ -20,17 +31,33 @@ module.exports = {
 
 	// Add the loader for .ts files.
 	module: {
-		loaders: [
+		rules: [
 			{
 				test: /\.tsx?$/,
-				loader: 'ts-loader'
+				use: 'ts-loader'
+			},
+			{
+				test: /\.scss$/,
+				use: extractCSS.extract([
+					{
+						loader: 'css-loader'
+					},
+					{
+						loader: 'sass-loader'
+					}
+				])
 			}
 		]
 	},
 
 	plugins: [
 		new webpack.optimize.UglifyJsPlugin({
-			minimize: true
-		})
+			minimize: true,
+			sourceMap: true,
+			compress: {
+				warnings: true
+			}
+		}),
+		extractCSS
 	]
 };
