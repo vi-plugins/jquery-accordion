@@ -1,7 +1,8 @@
 ///<reference types="jquery"/>
 
-import { JQueryPluginBase } from "jquery-base";
-import EventHelper from "jquery-events";
+import { JQueryPluginBase } from 'jquery-base';
+import EventHelper from 'jquery-events';
+import AttributeHelper from './lib/Attributes';
 
 import Animation from "./lib/Animation";
 import Scrolling from "./lib/Scrolling";
@@ -52,7 +53,12 @@ import './scss/accordion.scss';
 		}
 
 		initAccordion(): void {
+			AttributeHelper.loadOptions(this.$element, {
+				'data-autoclose': this.options.animation.autoClose,
+				'data-openduration': this.options.animation.openDuration
+			});
 
+			console.log(this.options);
 		}
 
 		/** local destroy overwrites JQueryPluginBase destroy method */
