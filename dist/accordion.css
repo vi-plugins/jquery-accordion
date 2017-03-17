@@ -1,4 +1,25 @@
-.accordion {
-  padding: 10px; }
+.accordion__panel {
+  margin-top: 10px; }
+  .accordion__panel:first-child {
+    margin-top: 0; }
+  .accordion__panel--open .accordion__content {
+    display: block; }
+
+.accordion__title {
+  margin: 0;
+  border: 1px solid grey;
+  background-color: lightcoral; }
+
+.accordion__titleLink {
+  display: block;
+  padding: 4px 10px;
+  text-decoration: none;
+  color: #000; }
+
+.accordion__content {
+  display: none;
+  padding: 10px;
+  border: 1px solid grey;
+  border-top: none; }
 
 /*# sourceMappingURL=accordion.css.map*/

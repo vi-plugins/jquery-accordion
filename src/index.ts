@@ -36,6 +36,8 @@ import './scss/accordion.scss';
 			}
 		};
 
+		private animation: Animation;
+
 		/** The plugins constructor - always load base class (JQueryPluginBase) first */
 		constructor(element: Element, options: any) {
 			super(Plugin.NAME, element, Plugin.DEFAULTS, options);
@@ -43,7 +45,6 @@ import './scss/accordion.scss';
 
 		/** Place initialization logic here */
 		init(): void {
-
 			// EventHelper wrapEvents demo
 			EventHelper.wrapEvents(
 				this.$element,
@@ -52,13 +53,25 @@ import './scss/accordion.scss';
 			);
 		}
 
-		initAccordion(): void {
-			AttributeHelper.loadOptions(this.$element, {
-				'data-autoclose': this.options.animation.autoClose,
-				'data-openduration': this.options.animation.openDuration
-			});
+		initAccordion(test: boolean = true): void {
 
-			console.log(this.options);
+			// this.options = AttributeHelper.mergeDataAttributes(this.$element, this.options, {
+			// 	animation: {
+			// 		autoClose: 'auto-close',
+			// 		openDuration: 'open-duration',
+			// 		closeDuration: 'close-duration'
+			// 	},
+			// 	scrolling: {
+			// 		active: 'scrolling-active',
+			// 		duration: 'scrolling-duration'
+			// 	},
+			// 	url: {
+			// 		active: 'url-active',
+			// 		encodeHash: 'url-encode-hash'
+			// 	}
+			// });
+			this.animation = new Animation(this.$element, this.options.animation);
+			this.animation.init();
 		}
 
 		/** local destroy overwrites JQueryPluginBase destroy method */

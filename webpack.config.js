@@ -51,13 +51,13 @@ module.exports = {
 	},
 
 	plugins: [
-		new webpack.optimize.UglifyJsPlugin({
-			minimize: true,
-			sourceMap: true,
-			compress: {
-				warnings: true
-			}
-		}),
+		// new webpack.optimize.UglifyJsPlugin({
+		// 	minimize: true,
+		// 	sourceMap: true,
+		// 	compress: {
+		// 		warnings: true
+		// 	}
+		// }),
 		extractCSS
 	]
 };
