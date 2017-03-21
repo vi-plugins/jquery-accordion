@@ -70,6 +70,7 @@ import './scss/accordion.scss';
 			// 		encodeHash: 'url-encode-hash'
 			// 	}
 			// });
+
 			this.animation = new Animation(this.$element, this.options.animation);
 			this.animation.init();
 		}

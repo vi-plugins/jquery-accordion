@@ -1,35 +1,43 @@
 import {JQueryModuleBase} from "jquery-base";
 import {AccordionAnimationOptions} from "../interfaces/AnimationOptions";
 
-export default class Demo extends JQueryModuleBase {
+export default class Animation extends JQueryModuleBase {
 
-	constructor(private $element: JQuery,
-				private options: AccordionAnimationOptions) {
+	constructor(protected $element: JQuery,
+				protected options: AccordionAnimationOptions) {
 		super();
 	}
 
 	init(): void {
-		this.$element.find('.accordion__titleLink').on('click.accordionAnimation', (e) => {
-			console.log('click');
+		console.log(this.options);
 
+		this.$element.find('.accordion__titleLink').on('click.accordionAnimation', (e) => {
 			e.preventDefault();
 			this.togglePanel( $(e.currentTarget) );
 		});
 	}
 
 	togglePanel( $titleLink: JQuery ): void {
-		let $panel = $titleLink.closest('accordion__panel');
-		let $content = $panel.find('accordion__content');
+		let $panel = $titleLink.closest('.accordion__panel');
+		let $content = $panel.find('.accordion__content');
 
 		if($panel.hasClass('accordion__panel--open')) {
-			$content.slideUp(this.options.closeDuration, () => {
-				$panel.removeClass('accordion__panel--open');
-			});
+			this.hidePanel($content, $panel);
 		} else {
-			$content.slideDown(this.options.openDuration, () => {
-				$panel.addClass('accordion__panel--open');
-			});
+			this.showPanel($content, $panel);
 		}
+	}
+
+	showPanel( $content: JQuery, $panel: JQuery ): void {
+		$content.slideDown(this.options.openDuration, () => {
+			$panel.addClass('accordion__panel--open');
+		});
+	}
+
+	hidePanel( $content: JQuery, $panel: JQuery ): void {
+		$content.slideUp(this.options.closeDuration, () => {
+			$panel.removeClass('accordion__panel--open');
+		});
 	}
 
 	destroy(): void {
