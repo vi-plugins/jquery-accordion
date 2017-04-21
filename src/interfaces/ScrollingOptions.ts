@@ -1,5 +1,7 @@
 export interface AccordionScrollingOptions {
 	active: boolean,
-	duration: number,
+	duration?: number,
+	dependencySelector?: string,
+	scrollTopAdditionalSpace?: number,
 	topOffset(): number,
 }

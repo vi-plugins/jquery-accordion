@@ -27,7 +27,8 @@ import './scss/accordion.scss';
 			},
 			scrolling: {
 				active: true,
-				duration: 500,
+				duration: 300,
+				dependencySelector: '.my-header',
 				topOffset: () => { return 0; }
 			},
 			url: {
@@ -37,6 +38,7 @@ import './scss/accordion.scss';
 		};
 
 		private animation: Animation;
+		private scrolling: Scrolling;
 
 		/** The plugins constructor - always load base class (JQueryPluginBase) first */
 		constructor(element: Element, options: any) {
@@ -73,6 +75,9 @@ import './scss/accordion.scss';
 
 			this.animation = new Animation(this.$element, this.options.animation);
 			this.animation.init();
+
+			this.scrolling = new Scrolling(this.$element, this.options.scrolling);
+			this.scrolling.init();
 		}
 
 		/** local destroy overwrites JQueryPluginBase destroy method */

@@ -9,12 +9,24 @@ export default class Animation extends JQueryModuleBase {
 	}
 
 	init(): void {
-		console.log(this.options);
+
+		/*if ( this.$element.attr('data-auto-close') ){
+			console.log('attr found');
+			console.log(this.$element.data('auto-close'));
+			this.options.autoClose = this.$element.data('auto-close');
+		}else {
+			console.log('attr not found');
+		}
+		console.log(this.options.autoClose);*/
+
+
+		this.options.autoClose = this.$element.attr('data-auto-close') ? this.$element.data('auto-close') != 'true' : this.options.autoClose;
 
 		this.$element.find('.accordion__titleLink').on('click.accordionAnimation', (e) => {
 			e.preventDefault();
 			this.togglePanel( $(e.currentTarget) );
 		});
+
 	}
 
 	togglePanel( $titleLink: JQuery ): void {
@@ -24,37 +36,47 @@ export default class Animation extends JQueryModuleBase {
 		if($panel.hasClass('accordion__panel--open')) {
 			this.hidePanel($content, $panel);
 		} else {
+
 			this.showPanel($content, $panel);
+
+			if (this.options.autoClose){
+				this.hideAllPannels($panel);
+			}
+
 		}
 	}
 
-	showPanel( $content: JQuery, $panel: JQuery ): void {
-		$content.slideDown(this.options.openDuration, () => {
-			$panel.addClass('accordion__panel--open');
+	hideAllPannels ($activePanel: JQuery): void {
+
+		this.$element.find('.accordion__panel--open').each( (index, elem)=>{
+			let $elem = $(elem);
+			this.hidePanel( $elem.find('.accordion__content'),$elem, $activePanel );
 		});
+
 	}
 
-	hidePanel( $content: JQuery, $panel: JQuery ): void {
+	showPanel( $content: JQuery, $panel: JQuery ): void {
+
+		$panel.trigger('before.open.panel.accordion');
+		$content.slideDown(this.options.openDuration, () => {
+			$panel.addClass('accordion__panel--open');
+			$panel.trigger('after.open.panel.accordion');
+		});
+
+	}
+
+	hidePanel( $content: JQuery, $panel: JQuery, $activePanel?: JQuery ): void {
+
+		$panel.trigger('before.close.panel.accordion',[$activePanel || null]);
 		$content.slideUp(this.options.closeDuration, () => {
 			$panel.removeClass('accordion__panel--open');
+			$panel.trigger('after.close.panel.accordion');
 		});
+
 	}
 
 	destroy(): void {
 		this.$element.find('.accordion__titleLink').off('click.accordionAnimation');
 	}
 
-	test($element: JQuery): void {
-		$element
-			.html('TypeScript Plugin loaded')
-			.css('backgroundColor', 'lightcoral')
-			.on('click', () => {
-				console.log('clicked element');
-				$element.css('backgroundColor', 'green');
-			});
-	}
-
-	add(x: number, y: number): number {
-		return x + y;
-	}
 }
