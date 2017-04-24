@@ -46,7 +46,7 @@ import './scss/accordion.scss';
 			EventHelper.wrapEvents(
 				this.$element,
 				'init.accordion',
-				$.proxy(this.initAccordion, this)
+				() => { this.initAccordion(); }
 			);
 		}
 
