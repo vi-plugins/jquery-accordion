@@ -29,12 +29,8 @@ import './scss/accordion.scss';
 				duration: 300,
 				topOffsetElement: '.my-header'
 			}
-
-			/*			url: {
-			 active: true,
-			 encodeHash: false
-			 }*/
 		};
+
 
 		private animation: Animation;
 		private scrolling: Scrolling;

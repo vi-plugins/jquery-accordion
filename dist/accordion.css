@@ -21,6 +21,8 @@
   padding: 10px;
   border: 1px solid grey;
   border-top: none; }
+  .accordion__content__example {
+    min-height: 300px; }
 
 .my-header {
   position: fixed;

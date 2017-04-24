@@ -11,10 +11,10 @@ export default class Scrolling extends JQueryModuleBase {
 
 	init(): void {
 
-		this.$element.children().on('before.close.panel.accordion', (e, $param) => {
+		this.$element.children().on('before.close.panel.accordion', (e, $activePanel) => {
 			e.preventDefault();
-			if ($param) {
-				this.calcScroll($param);
+			if ($activePanel) {
+				this.calcScroll($activePanel);
 			}
 		});
 	}
@@ -32,6 +32,7 @@ export default class Scrolling extends JQueryModuleBase {
 
 			openedContentHeight = $activePanel.prevAll('.accordion__panel--open').find('.accordion__content').outerHeight();
 		}
+
 
 		scrollTopPosition = this.getScrollTopPosition2($activePanel);
 

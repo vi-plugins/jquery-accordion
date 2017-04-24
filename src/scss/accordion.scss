@@ -31,8 +31,13 @@
 		padding: 10px;
 		border: 1px solid grey;
 		border-top: none;
+
+		&__example {
+			min-height: 300px;
+		}
 	}
 }
+
 
 .my-header {
 	position: fixed;
