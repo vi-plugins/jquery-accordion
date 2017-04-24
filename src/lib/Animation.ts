@@ -9,19 +9,14 @@ export default class Animation extends JQueryModuleBase {
 	}
 
 	init(): void {
-
 		if (this.$element.attr('data-auto-close')) {
-			console.log('attr found');
 			this.options.autoClose = this.$element.data('auto-close');
 		}
-		console.log(this.options.autoClose);
-		console.log('----------------------');
 
 		this.$element.find('.accordion__titleLink').on('click.panel.accordion', (e) => {
 			e.preventDefault();
 			this.togglePanel($(e.currentTarget));
 		});
-
 	}
 
 	protected togglePanel($titleLink: JQuery): void {
@@ -31,9 +26,8 @@ export default class Animation extends JQueryModuleBase {
 		if ($panel.hasClass('accordion__panel--open')) {
 			this.hidePanel($content, $panel);
 		} else {
-
 			this.showPanel($content, $panel);
-			console.log('autoclose: ' + this.options.autoClose);
+
 			if (this.options.autoClose) {
 				this.hideAllPannels($panel);
 			}
@@ -41,16 +35,13 @@ export default class Animation extends JQueryModuleBase {
 	}
 
 	protected hideAllPannels($activePanel: JQuery): void {
-
 		this.$element.find('.accordion__panel--open').each((index, elem) => {
 			let $elem = $(elem);
 			this.hidePanel($elem.find('.accordion__content'), $elem, $activePanel);
 		});
-
 	}
 
 	protected showPanel($content: JQuery, $panel: JQuery): void {
-
 		$panel.trigger('before.open.panel.accordion');
 		$content.slideDown(this.options.openDuration, () => {
 			$panel.addClass('accordion__panel--open');
@@ -60,17 +51,14 @@ export default class Animation extends JQueryModuleBase {
 	}
 
 	protected hidePanel($content: JQuery, $panel: JQuery, $activePanel?: JQuery): void {
-
 		$panel.trigger('before.close.panel.accordion', [$activePanel || null]);
 		$content.slideUp(this.options.closeDuration, () => {
 			$panel.removeClass('accordion__panel--open');
 			$panel.trigger('after.close.panel.accordion');
 		});
-
 	}
 
 	destroy(): void {
 		this.$element.find('.accordion__titleLink').off('click.panel.accordion');
 	}
-
 }

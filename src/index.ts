@@ -27,7 +27,7 @@ import './scss/accordion.scss';
 			scrolling: {
 				active: true,
 				duration: 300,
-				topOffsetElement: '.my-header'
+				topOffsetSelector: '.my-header'
 			}
 		};
 

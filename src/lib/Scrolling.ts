@@ -10,7 +10,6 @@ export default class Scrolling extends JQueryModuleBase {
 	}
 
 	init(): void {
-
 		this.$element.children().on('before.close.panel.accordion', (e, $activePanel) => {
 			e.preventDefault();
 			if ($activePanel) {
@@ -33,22 +32,19 @@ export default class Scrolling extends JQueryModuleBase {
 			openedContentHeight = $activePanel.prevAll('.accordion__panel--open').find('.accordion__content').outerHeight();
 		}
 
-
 		scrollTopPosition = this.getScrollTopPosition2($activePanel);
 
 		if (!this.isPanelInViewport(scrollTopPosition - openedContentHeight) || !this.isElementInViewport($activePanel)) {
 			this.animateScrolling(scrollTopPosition - openedContentHeight);
 		}
-
 	}
 
 	protected getScrollTopPosition2($elem: JQuery): number {
-
 		let topOffsetElementHeight: number = 0;
 		let topOffsetAdditional: number = 0;
 
-		if (this.options.topOffsetElement) {
-			topOffsetElementHeight = $(this.options.topOffsetElement).outerHeight();
+		if (this.options.topOffsetSelector) {
+			topOffsetElementHeight = $(this.options.topOffsetSelector).outerHeight();
 		}
 
 		if (this.options.topOffsetAdditional) {
@@ -65,7 +61,6 @@ export default class Scrolling extends JQueryModuleBase {
 	protected isElementInViewport($elem: JQuery): boolean {
 		return $elem.offset().top - $(window).scrollTop() <= $(window).height();
 	}
-
 
 	protected animateScrolling(scrollTo: number): void {
 		EventHelper.wrapEvents(
