@@ -10,52 +10,46 @@ export default class Animation extends JQueryModuleBase {
 
 	init(): void {
 
-		/*if ( this.$element.attr('data-auto-close') ){
+		if (this.$element.attr('data-auto-close')) {
 			console.log('attr found');
-			console.log(this.$element.data('auto-close'));
 			this.options.autoClose = this.$element.data('auto-close');
-		}else {
-			console.log('attr not found');
 		}
-		console.log(this.options.autoClose);*/
+		console.log(this.options.autoClose);
+		console.log('----------------------');
 
-
-		this.options.autoClose = this.$element.attr('data-auto-close') ? this.$element.data('auto-close') != 'true' : this.options.autoClose;
-
-		this.$element.find('.accordion__titleLink').on('click.accordionAnimation', (e) => {
+		this.$element.find('.accordion__titleLink').on('click.panel.accordion', (e) => {
 			e.preventDefault();
-			this.togglePanel( $(e.currentTarget) );
+			this.togglePanel($(e.currentTarget));
 		});
 
 	}
 
-	togglePanel( $titleLink: JQuery ): void {
+	protected togglePanel($titleLink: JQuery): void {
 		let $panel = $titleLink.closest('.accordion__panel');
 		let $content = $panel.find('.accordion__content');
 
-		if($panel.hasClass('accordion__panel--open')) {
+		if ($panel.hasClass('accordion__panel--open')) {
 			this.hidePanel($content, $panel);
 		} else {
 
 			this.showPanel($content, $panel);
-
-			if (this.options.autoClose){
+			console.log('autoclose: ' + this.options.autoClose);
+			if (this.options.autoClose) {
 				this.hideAllPannels($panel);
 			}
-
 		}
 	}
 
-	hideAllPannels ($activePanel: JQuery): void {
+	protected hideAllPannels($activePanel: JQuery): void {
 
-		this.$element.find('.accordion__panel--open').each( (index, elem)=>{
+		this.$element.find('.accordion__panel--open').each((index, elem) => {
 			let $elem = $(elem);
-			this.hidePanel( $elem.find('.accordion__content'),$elem, $activePanel );
+			this.hidePanel($elem.find('.accordion__content'), $elem, $activePanel);
 		});
 
 	}
 
-	showPanel( $content: JQuery, $panel: JQuery ): void {
+	protected showPanel($content: JQuery, $panel: JQuery): void {
 
 		$panel.trigger('before.open.panel.accordion');
 		$content.slideDown(this.options.openDuration, () => {
@@ -65,9 +59,9 @@ export default class Animation extends JQueryModuleBase {
 
 	}
 
-	hidePanel( $content: JQuery, $panel: JQuery, $activePanel?: JQuery ): void {
+	protected hidePanel($content: JQuery, $panel: JQuery, $activePanel?: JQuery): void {
 
-		$panel.trigger('before.close.panel.accordion',[$activePanel || null]);
+		$panel.trigger('before.close.panel.accordion', [$activePanel || null]);
 		$content.slideUp(this.options.closeDuration, () => {
 			$panel.removeClass('accordion__panel--open');
 			$panel.trigger('after.close.panel.accordion');
@@ -76,7 +70,7 @@ export default class Animation extends JQueryModuleBase {
 	}
 
 	destroy(): void {
-		this.$element.find('.accordion__titleLink').off('click.accordionAnimation');
+		this.$element.find('.accordion__titleLink').off('click.panel.accordion');
 	}
 
 }

@@ -1,14 +1,13 @@
 ///<reference types="jquery"/>
 
-import { JQueryPluginBase } from 'jquery-base';
+import {JQueryPluginBase} from 'jquery-base';
 import EventHelper from 'jquery-events';
-import AttributeHelper from './lib/Attributes';
 
 import Animation from "./lib/Animation";
 import Scrolling from "./lib/Scrolling";
-import Url from "./lib/Url";
+/*import Url from "./lib/Url";*/
 
-import { AccordionOptions } from './interfaces/AccordionOptions';
+import {AccordionOptions} from './interfaces/AccordionOptions';
 import './scss/accordion.scss';
 
 (function ($: JQueryStatic, window: any, document: any) {
@@ -28,13 +27,13 @@ import './scss/accordion.scss';
 			scrolling: {
 				active: true,
 				duration: 300,
-				dependencySelector: '.my-header',
-				topOffset: () => { return 0; }
-			},
-			url: {
-				active: true,
-				encodeHash: false
+				topOffsetElement: '.my-header'
 			}
+
+			/*			url: {
+			 active: true,
+			 encodeHash: false
+			 }*/
 		};
 
 		private animation: Animation;
@@ -56,22 +55,6 @@ import './scss/accordion.scss';
 		}
 
 		initAccordion(test: boolean = true): void {
-
-			// this.options = AttributeHelper.mergeDataAttributes(this.$element, this.options, {
-			// 	animation: {
-			// 		autoClose: 'auto-close',
-			// 		openDuration: 'open-duration',
-			// 		closeDuration: 'close-duration'
-			// 	},
-			// 	scrolling: {
-			// 		active: 'scrolling-active',
-			// 		duration: 'scrolling-duration'
-			// 	},
-			// 	url: {
-			// 		active: 'url-active',
-			// 		encodeHash: 'url-encode-hash'
-			// 	}
-			// });
 
 			this.animation = new Animation(this.$element, this.options.animation);
 			this.animation.init();
