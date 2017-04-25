@@ -26,11 +26,9 @@ import './scss/accordion.scss';
 			},
 			scrolling: {
 				active: true,
-				duration: 300,
-				topOffsetSelector: '.my-header'
+				duration: 300
 			}
 		};
-
 
 		private animation: Animation;
 		private scrolling: Scrolling;
