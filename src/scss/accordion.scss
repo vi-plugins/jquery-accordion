@@ -1,0 +1,38 @@
+.accordion {
+	&__panel {
+		margin-top: 10px;
+
+		&:first-child {
+			margin-top: 0;
+		}
+
+		&--open {
+			.accordion__content {
+				display: block;
+			}
+		}
+	}
+
+	&__title {
+		margin: 0;
+		border: 1px solid grey;
+		background-color: lightcoral;
+	}
+
+	&__titleLink {
+		display: block;
+		padding: 4px 10px;
+		text-decoration: none;
+		color: #000;
+	}
+
+	&__content {
+		display: none;
+		padding: 10px;
+		border: 1px solid grey;
+		border-top: none;
+	}
+}
+
+
+

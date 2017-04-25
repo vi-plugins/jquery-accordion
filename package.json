@@ -1,17 +1,18 @@
 {
-	"name": "jquery-boilerplate",
+	"name": "jquery-accordion",
 	"version": "0.1.0",
-	"description": "A TypeScript plugin boilerplate",
-	"main": "dist/boilerplate.min.js",
+	"description": "A TypeScript accordion plugin",
+	"main": "dist/accordion.min.js",
 	"module": "src/index.ts",
 	"typings": "src/index.d.ts",
-	"repository": "https://github.com/vi-plugins/jquery-boilerplate.git",
+	"repository": "https://github.com/vi-plugins/jquery-accordion.git",
 	"author": "Jan Rembold <janrembold@gmail.com>",
 	"license": "MIT",
 	"scripts": {
-		"clean": "rimraf dist",
 		"build": "npm run clean && webpack",
-		"build:watch": "npm run clean && webpack --watch",
+		"serve": "npm run clean && parallelshell \"npm run server -s\" \"webpack --watch\"",
+		"clean": "rimraf dist",
+		"server": "live-server --port=9090 --open=./example --watch=dist,example",
 		"pretest": "npm run build",
 		"test": "npm run --silent test:unit",
 		"test:unit": "tsc --module commonjs ./test/unit/*.ts && mocha ./test/unit/*.js"
@@ -20,16 +21,23 @@
 		"@types/jquery": "^2.0.39",
 		"@types/mocha": "^2.2.38",
 		"chai": "^3.5.0",
+		"css-loader": "^0.26.1",
+		"extract-text-webpack-plugin": "2.0.0-rc.3",
 		"mocha": "^3.2.0",
+		"node-sass": "^4.5.0",
+		"parallelshell": "^2.0.0",
 		"rimraf": "^2.5.4",
+		"sass-loader": "^5.0.0",
 		"source-map-loader": "^0.1.6",
 		"ts-loader": "^2.0.0",
 		"typescript": "^2.1.5",
 		"uglify-js": "^2.7.5",
-		"webpack": "^1.14.0"
+		"webpack": "^2.2.1",
+		"webpack-node-externals": "^1.5.4"
 	},
 	"dependencies": {
 		"jquery-base": "https://github.com/vi-plugins/jquery-base.git",
-		"jquery-events": "https://github.com/vi-plugins/jquery-events.git"
+		"jquery-events": "https://github.com/vi-plugins/jquery-events.git",
+		"live-server": "^1.2.0"
 	}
 }
