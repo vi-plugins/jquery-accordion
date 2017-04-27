@@ -22,7 +22,6 @@ export default class Animation extends JQueryModuleBase {
 	protected togglePanel($titleLink: JQuery): void {
 		let $panel = $titleLink.closest('.accordion__panel');
 		let $content = $panel.find('.accordion__content');
-
 		if ($panel.hasClass('accordion__panel--open')) {
 			this.hidePanel($content, $panel);
 		} else {
@@ -42,8 +41,9 @@ export default class Animation extends JQueryModuleBase {
 
 	protected showPanel($content: JQuery, $panel: JQuery): void {
 		$panel.trigger('before.open.panel.accordion');
-		$panel.addClass('accordion__panel--open');
+		$panel.addClass('accordion__panel--animation');
 		$content.slideDown(this.options.openDuration, () => {
+			$panel.addClass('accordion__panel--open');
 			$panel.trigger('after.open.panel.accordion');
 		});
 	}
@@ -51,6 +51,7 @@ export default class Animation extends JQueryModuleBase {
 	protected hidePanel($content: JQuery, $panel: JQuery, $activePanel?: JQuery): void {
 		$panel.trigger('before.close.panel.accordion', [$activePanel || null]);
 		$content.slideUp(this.options.closeDuration, () => {
+			$panel.removeClass('accordion__panel--animation');
 			$panel.removeClass('accordion__panel--open');
 			$panel.trigger('after.close.panel.accordion');
 		});
