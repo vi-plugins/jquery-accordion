@@ -13,6 +13,8 @@ export default class Animation extends JQueryModuleBase {
 			this.options.autoClose = this.$element.data('auto-close');
 		}
 
+		$('.accordion__panel--open').addClass('accordion__panel--animation');
+
 		this.$element.find('.accordion__titleLink').on('click.panel.accordion', (e) => {
 			e.preventDefault();
 			this.togglePanel($(e.currentTarget));
