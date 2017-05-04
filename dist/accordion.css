@@ -1,5 +1,7 @@
 .accordion__panel {
-  margin-top: 10px; }
+  position: relative;
+  float: left;
+  width: 100%; }
   .accordion__panel:first-child {
     margin-top: 0; }
   .accordion__panel--open .accordion__content {
@@ -21,5 +23,24 @@
   padding: 10px;
   border: 1px solid grey;
   border-top: none; }
+
+.accordion__tabs {
+  position: absolute;
+  float: left;
+  visibility: hidden;
+  height: 42px;
+  overflow: hidden;
+  list-style-type: none;
+  margin: 0;
+  padding: 0; }
+  .accordion__tabs__panel {
+    float: left;
+    display: block;
+    width: auto; }
+    .accordion__tabs__panel--open {
+      background-color: lightcoral; }
+  .accordion__tabs__titleLink {
+    display: block;
+    padding: 10px 50px; }
 
 /*# sourceMappingURL=accordion.css.map*/

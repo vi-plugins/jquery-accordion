@@ -9,10 +9,10 @@ export default class Animation extends JQueryModuleBase {
 	}
 
 	init(): void {
+
 		if (this.$element.attr('data-auto-close')) {
 			this.options.autoClose = this.$element.data('auto-close');
 		}
-
 		$('.accordion__panel--open').addClass('accordion__panel--animation');
 
 		this.$element.find('.accordion__titleLink').on('click.panel.accordion', (e) => {
@@ -46,6 +46,7 @@ export default class Animation extends JQueryModuleBase {
 		$panel.addClass('accordion__panel--animation');
 		$content.slideDown(this.options.openDuration, () => {
 			$panel.addClass('accordion__panel--open');
+			$content.removeAttr('style');
 			$panel.trigger('after.open.panel.accordion');
 		});
 	}
@@ -55,6 +56,7 @@ export default class Animation extends JQueryModuleBase {
 		$content.slideUp(this.options.closeDuration, () => {
 			$panel.removeClass('accordion__panel--animation');
 			$panel.removeClass('accordion__panel--open');
+			$content.removeAttr('style');
 			$panel.trigger('after.close.panel.accordion');
 		});
 	}

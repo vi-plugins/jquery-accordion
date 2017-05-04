@@ -5,6 +5,7 @@ import EventHelper from 'jquery-events';
 
 import Animation from "./lib/Animation";
 import Scrolling from "./lib/Scrolling";
+import Tabed from "./lib/Tabed";
 /*import Url from "./lib/Url";*/
 
 import {AccordionOptions} from './interfaces/AccordionOptions';
@@ -27,11 +28,15 @@ import './scss/accordion.scss';
 			scrolling: {
 				active: true,
 				duration: 300
+			},
+			tabed: {
+				active: true
 			}
 		};
 
 		private animation: Animation;
 		private scrolling: Scrolling;
+		private tabed: Tabed;
 
 		/** The plugins constructor - always load base class (JQueryPluginBase) first */
 		constructor(element: Element, options: any) {
@@ -55,6 +60,9 @@ import './scss/accordion.scss';
 
 			this.scrolling = new Scrolling(this.$element, this.options.scrolling);
 			this.scrolling.init();
+
+			this.tabed = new Tabed(this.$element, this.options.tabed);
+			this.tabed.init();
 		}
 
 		/** local destroy overwrites JQueryPluginBase destroy method */

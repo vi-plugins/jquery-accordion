@@ -1,6 +1,8 @@
 .accordion {
 	&__panel {
-		margin-top: 10px;
+		position: relative;
+		float: left;
+		width: 100%;
 
 		&:first-child {
 			margin-top: 0;
@@ -12,7 +14,6 @@
 			}
 		}
 	}
-
 	&__title {
 		margin: 0;
 		border: 1px solid grey;
@@ -31,6 +32,33 @@
 		padding: 10px;
 		border: 1px solid grey;
 		border-top: none;
+	}
+
+	&__tabs {
+		position: absolute;
+		float: left;
+		visibility: hidden;
+		height: 42px;
+		overflow: hidden;
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+
+
+		&__panel {
+			float: left;
+			display: block;
+			width: auto;
+
+			&--open {
+				background-color: lightcoral;
+			}
+		}
+
+		&__titleLink {
+			display: block;
+			padding: 10px 50px;
+		}
 	}
 }
 
