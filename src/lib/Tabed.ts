@@ -9,19 +9,19 @@ export default class Animation extends JQueryModuleBase {
 	}
 
 	init(): void {
-		if (this.options.active){
+		if (this.options.active) {
 			this.renderTabs();
 			this.toggleView();
 			this.eventListener();
 		}
 	}
 
-	protected eventListener():void {
+	protected eventListener(): void {
 		let resizeTimer: any;
-		$(window).on('resize.window.accordion', ()=>{
+		$(window).on('resize.window.accordion', () => {
 
 			clearTimeout(resizeTimer);
-			resizeTimer = setTimeout(()=>{
+			resizeTimer = setTimeout(() => {
 				this.toggleView();
 			}, 250);
 		});
@@ -32,8 +32,8 @@ export default class Animation extends JQueryModuleBase {
 		});
 	}
 
-	protected toggleView():void {
-		if (this.fitIntoParent()){
+	protected toggleView(): void {
+		if (this.fitIntoParent()) {
 			this.showTabs();
 		} else {
 			this.hideTabs();
@@ -43,26 +43,24 @@ export default class Animation extends JQueryModuleBase {
 	protected renderTabs(): void {
 		// inserted markup
 		const insertedTabMarkup = {
-			parent:
-				'<ul class="accordion__tabs"></ul>',
+			parent: '<ul class="accordion__tabs"></ul>',
 			child: `
 				<li class="accordion__tabs__panel">
 					<a class="accordion__tabs__titleLink"></a>
 				</li>`
 		};
 
-
 		// create list container
 		this.$element.prepend(insertedTabMarkup.parent);
 
 		// create list item from accordion items
-		this.$element.find('.accordion__titleLink').each( (index, elem)=> {
+		this.$element.find('.accordion__titleLink').each((index, elem) => {
 
 			// append child markup
 			this.$element.find('.accordion__tabs').append(insertedTabMarkup.child);
 
 			// set active tab
-			if ( $(elem).parents('.accordion__panel').is('[class*=--open]') ){
+			if ($(elem).parents('.accordion__panel').is('[class*=--open]')) {
 				this.$element.find('.accordion__tabs__panel').eq(index).addClass('accordion__tabs__panel--open');
 			}
 
@@ -72,7 +70,7 @@ export default class Animation extends JQueryModuleBase {
 	}
 
 	// Triggered by click event only
-	protected toggleTabs($elem:JQuery): void {
+	protected toggleTabs($elem: JQuery): void {
 		let activeTabIndex = $elem.parents('.accordion__tabs__panel').index();
 
 		// remove all active tabs
@@ -93,10 +91,10 @@ export default class Animation extends JQueryModuleBase {
 		let tabsWidth: number = 0;
 		let fits: boolean = true;
 
-		this.$element.find('.accordion__tabs__panel').each( (index, elem)=>{
+		this.$element.find('.accordion__tabs__panel').each((index, elem) => {
 
 			tabsWidth = tabsWidth + $(elem).outerWidth();
-			if ( tabsWidth >= contentWidth) {
+			if (tabsWidth >= contentWidth) {
 				fits = false;
 				return false;
 			}
@@ -104,17 +102,16 @@ export default class Animation extends JQueryModuleBase {
 		return fits;
 	}
 
-	protected showTabs():void {
+	protected showTabs(): void {
 		let $accordionOpenedPanels: JQuery = this.$element.find('.accordion__panel--open');
-		let activePanelIndex: number = $accordionOpenedPanels.index()-1;
+		let activePanelIndex: number = $accordionOpenedPanels.index() - 1;
 
-		if ( $accordionOpenedPanels.length > 1){
-
+		if ($accordionOpenedPanels.length > 1) {
 			// accordion has more than one panel opened. use only first
 			$accordionOpenedPanels.not(':first-child').removeClass('accordion__panel--open accordion__panel--animation');
 			this.$element.find('.accordion__panel').eq(activePanelIndex).addClass('accordion__panel--open accordion__panel--animation');
 
-		} else if ( $accordionOpenedPanels.length < 1 ){
+		} else if ($accordionOpenedPanels.length < 1) {
 
 			// accordion has no opened panels. set first tab as opened
 			activePanelIndex = 0;
@@ -128,20 +125,20 @@ export default class Animation extends JQueryModuleBase {
 		this.$element.find('.accordion__tabs__panel').eq(activePanelIndex).addClass('accordion__tabs__panel--open');
 
 		// display tabs element
-		this.$element.find('.accordion__tabs').css({'position':'relative', 'visibility':'visible'});
+		this.$element.find('.accordion__tabs').css({'position': 'relative', 'visibility': 'visible'});
 
 		//hide accordion panels titles
-		this.$element.find('.accordion__panel').find('.accordion__title').css('display','none');
+		this.$element.find('.accordion__panel').find('.accordion__title').css('display', 'none');
 	}
 
 
-	protected hideTabs():void {
+	protected hideTabs(): void {
 
 		// hide tabs element
-		this.$element.find('.accordion__tabs').css({'position':'absolute','visibility':'hidden'});
+		this.$element.find('.accordion__tabs').css({'position': 'absolute', 'visibility': 'hidden'});
 
 		//show accordion panels
-		this.$element.find('.accordion__panel').find('.accordion__title').css('display','block');
+		this.$element.find('.accordion__panel').find('.accordion__title').css('display', 'block');
 	}
 
 	destroy(): void {
