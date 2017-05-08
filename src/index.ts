@@ -6,7 +6,6 @@ import EventHelper from 'jquery-events';
 import Animation from "./lib/Animation";
 import Scrolling from "./lib/Scrolling";
 import Tabed from "./lib/Tabed";
-/*import Url from "./lib/Url";*/
 
 import {AccordionOptions} from './interfaces/AccordionOptions';
 import './scss/accordion.scss';
@@ -30,7 +29,8 @@ import './scss/accordion.scss';
 				duration: 300
 			},
 			tabed: {
-				active: true
+				active: true,
+				startAt: 0
 			}
 		};
 
