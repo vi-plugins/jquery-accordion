@@ -81,10 +81,10 @@ export default class Animation extends JQueryModuleBase {
 		// set new active tab
 		$elem.parents('.accordion__tabs__panel').addClass('accordion__tabs__panel--open');
 
-		// set new active accordion panel
-		this.$element.find('.accordion__panel').eq(activeTabIndex).addClass('accordion__panel--open accordion__panel--animation');
-
-		this.$element.find('.accordion__panel').eq(activeTabIndex).trigger('after.close.panel.accordion');
+		// set new active accordion panel and trigger event
+		this.$element.find('.accordion__panel').eq(activeTabIndex)
+			.addClass('accordion__panel--open accordion__panel--animation')
+			.trigger('after.close.panel.accordion');
 	}
 
 	protected fitIntoParent(): boolean {
@@ -108,16 +108,17 @@ export default class Animation extends JQueryModuleBase {
 		let activePanelIndex: number = $accordionOpenedPanels.index() - 1;
 
 		if ($accordionOpenedPanels.length > 1) {
-			// accordion has more than one panel opened. use only first
-			$accordionOpenedPanels.not(':first-child').removeClass('accordion__panel--open accordion__panel--animation');
-			this.$element.find('.accordion__panel').eq(activePanelIndex).addClass('accordion__panel--open accordion__panel--animation');
+			// accordion has more than one panel opened. Remove open classes from every opened panels except first found
+			$accordionOpenedPanels.slice(1).removeClass('accordion__panel--open accordion__panel--animation');
 
 		} else if ($accordionOpenedPanels.length < 1) {
 
 			// accordion has no opened panels. set first tab as opened
 			activePanelIndex = 0;
-			this.$element.find('.accordion__panel').eq(activePanelIndex).addClass('accordion__panel--open accordion__panel--animation');
-			this.$element.find('.accordion__panel').eq(activePanelIndex).trigger('after.close.panel.accordion');
+
+			this.$element.find('.accordion__panel').eq(activePanelIndex)
+				.addClass('accordion__panel--open accordion__panel--animation')
+				.trigger('after.close.panel.accordion');
 		}
 
 		// remove all active tabs panels
