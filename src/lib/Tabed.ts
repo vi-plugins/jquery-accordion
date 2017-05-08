@@ -84,7 +84,7 @@ export default class Animation extends JQueryModuleBase {
 		// set new active accordion panel and trigger event
 		this.$element.find('.accordion__panel').eq(activeTabIndex)
 			.addClass('accordion__panel--open accordion__panel--animation')
-			.trigger('after.close.panel.accordion');
+			.trigger('after.open.panel.accordion');
 	}
 
 	protected fitIntoParent(): boolean {
@@ -118,7 +118,7 @@ export default class Animation extends JQueryModuleBase {
 
 			this.$element.find('.accordion__panel').eq(activePanelIndex)
 				.addClass('accordion__panel--open accordion__panel--animation')
-				.trigger('after.close.panel.accordion');
+				.trigger('after.open.panel.accordion');
 		}
 
 		// remove all active tabs panels
