@@ -1,10 +1,10 @@
 import {JQueryModuleBase} from "jquery-base";
-import {AccordionTabedOptions} from "../interfaces/TabedOptions";
+import {AccordionTabbedOptions} from "../interfaces/TabbedOptions";
 
-export default class Animation extends JQueryModuleBase {
+export default class Module extends JQueryModuleBase {
 
 	constructor(protected $element: JQuery,
-				protected options: AccordionTabedOptions) {
+				protected options: AccordionTabbedOptions) {
 		super();
 	}
 
