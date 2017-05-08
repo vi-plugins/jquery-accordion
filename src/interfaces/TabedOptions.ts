@@ -1,3 +1,4 @@
 export interface AccordionTabedOptions {
-	active: boolean
+	active: boolean,
+	startAt: number
 }

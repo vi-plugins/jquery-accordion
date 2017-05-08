@@ -18,7 +18,7 @@ export default class Animation extends JQueryModuleBase {
 
 	protected eventListener(): void {
 		let resizeTimer: any;
-		$(window).on('resize.window.accordion', () => {
+		$(window).on('resize.window.tabs.accordion', () => {
 
 			clearTimeout(resizeTimer);
 			resizeTimer = setTimeout(() => {
@@ -33,7 +33,7 @@ export default class Animation extends JQueryModuleBase {
 	}
 
 	protected toggleView(): void {
-		if (this.fitIntoParent()) {
+		if (this.fitIntoParent() && $(window).width() > this.options.startAt) {
 			this.showTabs();
 		} else {
 			this.hideTabs();
@@ -69,7 +69,6 @@ export default class Animation extends JQueryModuleBase {
 		});
 	}
 
-	// Triggered by click event only
 	protected toggleTabs($elem: JQuery): void {
 		let activeTabIndex = $elem.parents('.accordion__tabs__panel').index();
 
@@ -130,7 +129,6 @@ export default class Animation extends JQueryModuleBase {
 		//hide accordion panels titles
 		this.$element.find('.accordion__panel').find('.accordion__title').css('display', 'none');
 	}
-
 
 	protected hideTabs(): void {
 
