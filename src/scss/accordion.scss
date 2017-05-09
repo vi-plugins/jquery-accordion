@@ -44,7 +44,13 @@
 		margin: 0;
 		padding: 0;
 
-		&__panel {
+
+		&--visible {
+			position: relative;
+			visibility: visible;
+		}
+
+		&Panel {
 			float: left;
 			display: block;
 			width: auto;
@@ -54,7 +60,7 @@
 			}
 		}
 
-		&__titleLink {
+		&TitleLink {
 			display: block;
 			padding: 10px 50px;
 		}

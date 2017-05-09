@@ -26,13 +26,14 @@ export default class Animation extends JQueryModuleBase {
 			}, 250);
 		});
 
-		this.$element.find('.accordion__tabs__titleLink').on('click.panel.tabs.accordion', (e) => {
+		this.$element.find('.accordion__tabsTitleLink').on('click.panel.tabs.accordion', (e) => {
 			e.preventDefault();
 			this.toggleTabs($(e.currentTarget));
 		});
 	}
 
 	protected toggleView(): void {
+
 		if (this.fitIntoParent() && $(window).width() > this.options.startAt) {
 			this.showTabs();
 		} else {
@@ -45,8 +46,8 @@ export default class Animation extends JQueryModuleBase {
 		const insertedTabMarkup = {
 			parent: '<ul class="accordion__tabs"></ul>',
 			child: `
-				<li class="accordion__tabs__panel">
-					<a class="accordion__tabs__titleLink"></a>
+				<li class="accordion__tabsPanel">
+					<a class="accordion__tabsTitleLink"></a>
 				</li>`
 		};
 
@@ -61,25 +62,25 @@ export default class Animation extends JQueryModuleBase {
 
 			// set active tab
 			if ($(elem).parents('.accordion__panel').is('[class*=--open]')) {
-				this.$element.find('.accordion__tabs__panel').eq(index).addClass('accordion__tabs__panel--open');
+				this.$element.find('.accordion__tabsPanel').eq(index).addClass('accordion__tabsPanel--open');
 			}
 
 			// fill child markup with text from accordion titleLink
-			this.$element.find('.accordion__tabs__titleLink').eq(index).append($(elem).text());
+			this.$element.find('.accordion__tabsTitleLink').eq(index).append($(elem).text());
 		});
 	}
 
 	protected toggleTabs($elem: JQuery): void {
-		let activeTabIndex = $elem.parents('.accordion__tabs__panel').index();
+		let activeTabIndex = $elem.parents('.accordion__tabsPanel').index();
 
 		// remove all active tabs
-		this.$element.find('.accordion__tabs__panel').removeClass('accordion__tabs__panel--open');
+		this.$element.find('.accordion__tabsPanel').removeClass('accordion__tabsPanel--open');
 
 		// remove all active accordion panels
 		this.$element.find('.accordion__panel').removeClass('accordion__panel--open accordion__panel--animation');
 
 		// set new active tab
-		$elem.parents('.accordion__tabs__panel').addClass('accordion__tabs__panel--open');
+		$elem.parents('.accordion__tabsPanel').addClass('accordion__tabsPanel--open');
 
 		// set new active accordion panel and trigger event
 		this.$element.find('.accordion__panel').eq(activeTabIndex)
@@ -92,7 +93,7 @@ export default class Animation extends JQueryModuleBase {
 		let tabsWidth: number = 0;
 		let fits: boolean = true;
 
-		this.$element.find('.accordion__tabs__panel').each((index, elem) => {
+		this.$element.find('.accordion__tabsPanel').each((index, elem) => {
 
 			tabsWidth = tabsWidth + $(elem).outerWidth();
 			if (tabsWidth >= contentWidth) {
@@ -122,28 +123,27 @@ export default class Animation extends JQueryModuleBase {
 		}
 
 		// remove all active tabs panels
-		this.$element.find('.accordion__tabs__panel').removeClass('accordion__tabs__panel--open');
+		this.$element.find('.accordion__tabsPanel').removeClass('accordion__tabsPanel--open');
 
 		// set new active tab panel
-		this.$element.find('.accordion__tabs__panel').eq(activePanelIndex).addClass('accordion__tabs__panel--open');
+		this.$element.find('.accordion__tabsPanel').eq(activePanelIndex).addClass('accordion__tabsPanel--open');
 
 		// display tabs element
-		this.$element.find('.accordion__tabs').css({'position': 'relative', 'visibility': 'visible'});
+		this.$element.find('.accordion__tabs').addClass('accordion__tabs--visible');
 
 		//hide accordion panels titles
 		this.$element.find('.accordion__panel').find('.accordion__title').css('display', 'none');
 	}
 
 	protected hideTabs(): void {
-
 		// hide tabs element
-		this.$element.find('.accordion__tabs').css({'position': 'absolute', 'visibility': 'hidden'});
+		this.$element.find('.accordion__tabs').removeClass('accordion__tabs--visible');
 
 		//show accordion panels
 		this.$element.find('.accordion__panel').find('.accordion__title').css('display', 'block');
 	}
 
 	destroy(): void {
-		this.$element.find('.accordion__tabs__titleLink').off('click.panel.tabs.accordion');
+		this.$element.find('.accordion__tabsTitleLink').off('click.panel.tabs.accordion');
 	}
 }
