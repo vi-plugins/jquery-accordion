@@ -23,6 +23,7 @@ export default class Animation extends JQueryModuleBase {
 	protected togglePanel($titleLink: JQuery): void {
 		let $panel = $titleLink.closest('.accordion__panel');
 		let $content = $panel.find('.accordion__content');
+
 		if ($panel.hasClass('accordion__panel--open')) {
 			this.hidePanel($content, $panel);
 		} else {
@@ -41,24 +42,29 @@ export default class Animation extends JQueryModuleBase {
 	}
 
 	protected showPanel($content: JQuery, $panel: JQuery): void {
-		$panel.trigger('before.open.panel.accordion');
-		$panel.addClass('accordion__panel--opening');
+		$panel
+			.trigger('before.open.panel.accordion')
+			.addClass('accordion__panel--opening');
 		$content.slideDown(this.options.openDuration, () => {
-			$panel.addClass('accordion__panel--open');
-			$panel.removeClass('accordion__panel--opening');
+			$panel
+				.addClass('accordion__panel--open')
+				.removeClass('accordion__panel--opening')
+				.trigger('after.open.panel.accordion');
 			$content.removeAttr('style');
-			$panel.trigger('after.open.panel.accordion');
 		});
 	}
 
 	protected hidePanel($content: JQuery, $panel: JQuery, $activePanel?: JQuery): void {
-		$panel.trigger('before.close.panel.accordion', [$activePanel || null]);
-		$panel.addClass('accordion__panel--closing');
+		$panel
+			.trigger('before.close.panel.accordion', [$activePanel || null])
+			.addClass('accordion__panel--closing');
+
 		$content.slideUp(this.options.closeDuration, () => {
-			$panel.removeClass('accordion__panel--open');
-			$panel.removeClass('accordion__panel--closing');
+			$panel
+				.removeClass('accordion__panel--open')
+				.removeClass('accordion__panel--closing')
+				.trigger('after.close.panel.accordion');
 			$content.removeAttr('style');
-			$panel.trigger('after.close.panel.accordion');
 		});
 	}
 

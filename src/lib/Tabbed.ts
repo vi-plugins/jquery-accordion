@@ -1,14 +1,19 @@
 import {JQueryModuleBase} from "jquery-base";
-import {AccordionTabedOptions} from "../interfaces/TabedOptions";
+import {AccordionTabbedOptions} from "../interfaces/TabbedOptions";
 
 export default class Animation extends JQueryModuleBase {
 
 	constructor(protected $element: JQuery,
-				protected options: AccordionTabedOptions) {
+				protected options: AccordionTabbedOptions) {
 		super();
 	}
 
 	init(): void {
+
+		if (this.$element.hasClass('tabbed')) {
+			this.options.active = true;
+		}
+
 		if (this.options.active) {
 			this.renderTabs();
 			this.toggleView();
@@ -34,12 +39,13 @@ export default class Animation extends JQueryModuleBase {
 
 	protected toggleView(): void {
 
-		if (this.fitIntoParent() && $(window).width() > this.options.startAt) {
+		if (this.fitIntoParent() && $(window).outerWidth() >= this.options.minViewportWidth) {
 			this.showTabs();
 		} else {
 			this.hideTabs();
 		}
 	}
+
 
 	protected renderTabs(): void {
 		// inserted markup
@@ -77,14 +83,14 @@ export default class Animation extends JQueryModuleBase {
 		this.$element.find('.accordion__tabsPanel').removeClass('accordion__tabsPanel--open');
 
 		// remove all active accordion panels
-		this.$element.find('.accordion__panel').removeClass('accordion__panel--open accordion__panel--animation');
+		this.$element.find('.accordion__panel').removeClass('accordion__panel--open');
 
 		// set new active tab
 		$elem.parents('.accordion__tabsPanel').addClass('accordion__tabsPanel--open');
 
 		// set new active accordion panel and trigger event
 		this.$element.find('.accordion__panel').eq(activeTabIndex)
-			.addClass('accordion__panel--open accordion__panel--animation')
+			.addClass('accordion__panel--open')
 			.trigger('after.open.panel.accordion');
 	}
 
@@ -110,7 +116,7 @@ export default class Animation extends JQueryModuleBase {
 
 		if ($accordionOpenedPanels.length > 1) {
 			// accordion has more than one panel opened. Remove open classes from every opened panels except first found
-			$accordionOpenedPanels.slice(1).removeClass('accordion__panel--open accordion__panel--animation');
+			$accordionOpenedPanels.slice(1).removeClass('accordion__panel--open');
 
 		} else if ($accordionOpenedPanels.length < 1) {
 
@@ -118,7 +124,7 @@ export default class Animation extends JQueryModuleBase {
 			activePanelIndex = 0;
 
 			this.$element.find('.accordion__panel').eq(activePanelIndex)
-				.addClass('accordion__panel--open accordion__panel--animation')
+				.addClass('accordion__panel--open')
 				.trigger('after.open.panel.accordion');
 		}
 
