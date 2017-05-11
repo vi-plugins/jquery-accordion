@@ -33,13 +33,16 @@
   list-style-type: none;
   margin: 0;
   padding: 0; }
-  .accordion__tabs__panel {
+  .accordion__tabs--visible {
+    position: relative;
+    visibility: visible; }
+  .accordion__tabsPanel {
     float: left;
     display: block;
     width: auto; }
-    .accordion__tabs__panel--open {
+    .accordion__tabsPanel--open {
       background-color: lightcoral; }
-  .accordion__tabs__titleLink {
+  .accordion__tabsTitleLink {
     display: block;
     padding: 10px 50px; }
 
