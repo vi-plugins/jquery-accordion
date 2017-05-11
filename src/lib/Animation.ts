@@ -43,9 +43,10 @@ export default class Animation extends JQueryModuleBase {
 
 	protected showPanel($content: JQuery, $panel: JQuery): void {
 		$panel.trigger('before.open.panel.accordion');
-		$panel.addClass('accordion__panel--animation');
+		$panel.addClass('accordion__panel--opening');
 		$content.slideDown(this.options.openDuration, () => {
 			$panel.addClass('accordion__panel--open');
+			$panel.removeClass('accordion__panel--opening');
 			$content.removeAttr('style');
 			$panel.trigger('after.open.panel.accordion');
 		});
@@ -53,9 +54,10 @@ export default class Animation extends JQueryModuleBase {
 
 	protected hidePanel($content: JQuery, $panel: JQuery, $activePanel?: JQuery): void {
 		$panel.trigger('before.close.panel.accordion', [$activePanel || null]);
+		$panel.addClass('accordion__panel--closing');
 		$content.slideUp(this.options.closeDuration, () => {
-			$panel.removeClass('accordion__panel--animation');
 			$panel.removeClass('accordion__panel--open');
+			$panel.removeClass('accordion__panel--closing');
 			$content.removeAttr('style');
 			$panel.trigger('after.close.panel.accordion');
 		});
