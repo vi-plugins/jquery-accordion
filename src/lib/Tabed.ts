@@ -129,7 +129,7 @@ export default class Animation extends JQueryModuleBase {
 		this.$element.find('.accordion__tabsPanel').eq(activePanelIndex).addClass('accordion__tabsPanel--open');
 
 		// display tabs element
-		this.$element.find('.accordion__tabs').addClass('accordion__tabs--visible');
+		this.$element.addClass('tabs');
 
 		//hide accordion panels titles
 		this.$element.find('.accordion__panel').find('.accordion__title').css('display', 'none');
@@ -137,7 +137,7 @@ export default class Animation extends JQueryModuleBase {
 
 	protected hideTabs(): void {
 		// hide tabs element
-		this.$element.find('.accordion__tabs').removeClass('accordion__tabs--visible');
+		this.$element.removeClass('tabs');
 
 		//show accordion panels
 		this.$element.find('.accordion__panel').find('.accordion__title').css('display', 'block');

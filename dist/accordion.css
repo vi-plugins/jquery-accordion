@@ -33,9 +33,6 @@
   list-style-type: none;
   margin: 0;
   padding: 0; }
-  .accordion__tabs--visible {
-    position: relative;
-    visibility: visible; }
   .accordion__tabsPanel {
     float: left;
     display: block;
@@ -45,5 +42,9 @@
   .accordion__tabsTitleLink {
     display: block;
     padding: 10px 50px; }
+
+.accordion.tabs .accordion__tabs {
+  position: relative;
+  visibility: visible; }
 
 /*# sourceMappingURL=accordion.css.map*/
