@@ -1,4 +1,6 @@
 .accordion {
+
+
 	&__panel {
 		position: relative;
 		float: left;
@@ -45,11 +47,6 @@
 		padding: 0;
 
 
-		&--visible {
-			position: relative;
-			visibility: visible;
-		}
-
 		&Panel {
 			float: left;
 			display: block;
@@ -63,6 +60,13 @@
 		&TitleLink {
 			display: block;
 			padding: 10px 50px;
+		}
+	}
+
+	&.tabs {
+		.accordion__tabs {
+			position: relative;
+			visibility: visible;
 		}
 	}
 }
