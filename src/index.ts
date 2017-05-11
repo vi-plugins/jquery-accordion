@@ -5,7 +5,7 @@ import EventHelper from 'jquery-events';
 
 import Animation from "./lib/Animation";
 import Scrolling from "./lib/Scrolling";
-import Tabed from "./lib/Tabed";
+import Tabbed from "./lib/Tabbed";
 
 import {AccordionOptions} from './interfaces/AccordionOptions';
 import './scss/accordion.scss';
@@ -28,15 +28,15 @@ import './scss/accordion.scss';
 				active: true,
 				duration: 300
 			},
-			tabed: {
-				active: true,
-				startAt: 0
+			tabbed: {
+				active: false,
+				minViewportWidth: 0
 			}
 		};
 
 		private animation: Animation;
 		private scrolling: Scrolling;
-		private tabed: Tabed;
+		private tabbed: Tabbed;
 
 		/** The plugins constructor - always load base class (JQueryPluginBase) first */
 		constructor(element: Element, options: any) {
@@ -53,7 +53,7 @@ import './scss/accordion.scss';
 			);
 		}
 
-		initAccordion(test: boolean = true): void {
+		initAccordion(): void {
 
 			this.animation = new Animation(this.$element, this.options.animation);
 			this.animation.init();
@@ -61,13 +61,16 @@ import './scss/accordion.scss';
 			this.scrolling = new Scrolling(this.$element, this.options.scrolling);
 			this.scrolling.init();
 
-			this.tabed = new Tabed(this.$element, this.options.tabed);
-			this.tabed.init();
+			this.tabbed = new Tabbed(this.$element, this.options.tabbed);
+			this.tabbed.init();
 		}
 
 		/** local destroy overwrites JQueryPluginBase destroy method */
 		destroy(): void {
 			// custom destroy calls
+			this.animation.destroy();
+			this.scrolling.destroy();
+			this.tabbed.destroy();
 
 			// call destroy function of parent class as last call to reset element to initial state
 			super.destroy();
