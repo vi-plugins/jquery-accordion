@@ -16,6 +16,17 @@ export default class Scrolling extends JQueryModuleBase {
 				this.calcScroll($activePanel);
 			}
 		});
+
+		if (this.options.scrollOnOpen) {
+			this.$element.children().on('after.open.panel.accordion', (e, $activePanel) => {
+				e.preventDefault();
+				if ($activePanel) {
+					let targetScrollTop = this.getScrollTopPosition($($activePanel));
+					let currentScrollTop = $('html, body').scrollTop();
+					this.animateScrolling(targetScrollTop);
+				}			
+			});
+		}
 	}
 
 	protected calcScroll($activePanel: JQuery): void {
