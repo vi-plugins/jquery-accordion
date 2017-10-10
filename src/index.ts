@@ -26,7 +26,8 @@ import './scss/accordion.scss';
 			},
 			scrolling: {
 				active: true,
-				duration: 300
+				duration: 300,
+				scrollOnOpen: false
 			},
 			tabbed: {
 				active: false,

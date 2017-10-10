@@ -49,7 +49,7 @@ export default class Animation extends JQueryModuleBase {
 			$panel
 				.addClass('accordion__panel--open')
 				.removeClass('accordion__panel--opening')
-				.trigger('after.open.panel.accordion');
+				.trigger('after.open.panel.accordion', $panel);
 			$content.removeAttr('style');
 		});
 	}
