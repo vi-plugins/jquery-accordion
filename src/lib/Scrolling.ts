@@ -22,7 +22,6 @@ export default class Scrolling extends JQueryModuleBase {
 				e.preventDefault();
 				if ($activePanel) {
 					let targetScrollTop = this.getScrollTopPosition($($activePanel));
-					let currentScrollTop = $('html, body').scrollTop();
 					this.animateScrolling(targetScrollTop);
 				}			
 			});
