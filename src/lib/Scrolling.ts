@@ -20,11 +20,12 @@ export default class Scrolling extends JQueryModuleBase {
 		if (this.options.scrollOnOpen) {
 			this.$element.children().on('after.open.panel.accordion', (e, $activePanel) => {
 				e.preventDefault();
-				if ($activePanel) {
+				let scrollingEnabled = this.options.scrollOnOpenMaximumScreenWidth == null || Scrolling.getWindowWidth() <= this.options.scrollOnOpenMaximumScreenWidth;
+				if ($activePanel && scrollingEnabled) {
 					let targetScrollTop = this.getScrollTopPosition($($activePanel));
 					this.animateScrolling(targetScrollTop);
 				}			
-			});
+			});	
 		}
 	}
 
@@ -82,6 +83,11 @@ export default class Scrolling extends JQueryModuleBase {
 			}
 		);
 	}
+
+	private static getWindowWidth() {
+		return window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+	}
+
 
 	destroy(): void {
 		this.$element.children().off('before.close.panel.accordion');
