@@ -72,7 +72,7 @@ export default class Animation extends JQueryModuleBase {
 			}
 
 			// fill child markup with text from accordion titleLink
-			this.$element.find('.accordion__tabsTitleLink').eq(index).append($(elem).text());
+			this.$element.find('.accordion__tabsTitleLink').eq(index).append($(elem).html());
 		});
 	}
 
