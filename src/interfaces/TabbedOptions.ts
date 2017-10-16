@@ -1,4 +1,5 @@
 export interface AccordionTabbedOptions {
 	active: boolean,
-	minViewportWidth: number
+	minViewportWidth: number,
+	preventOverfulTabHeaders: boolean
 }

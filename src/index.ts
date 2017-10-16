@@ -31,7 +31,8 @@ import './scss/accordion.scss';
 			},
 			tabbed: {
 				active: false,
-				minViewportWidth: 0
+				minViewportWidth: 0,
+				preventOverfulTabHeaders: true
 			}
 		};
 
