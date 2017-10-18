@@ -108,7 +108,7 @@
 	<script src="../dist/accordion.min.js"></script>
 	<script>
 		$(document).ready(function() {
-		    $('.accordion').accordion({ tabbed: {minViewportWidth: 700}, scrolling: {topOffsetSelector: '.my-header', scrollOnOpen: true }}).trigger('init.accordion');
+		    $('.accordion').accordion({ tabbed: {minViewportWidth: 700}, scrolling: {topOffsetSelector: '.my-header', scrollOnOpen: true, scrollOnOpenMaximumScreenWidth: 480 }}).trigger('init.accordion');
 
 		    // Destroy plugin
 //			 $('.accordion').trigger('destroy.accordion');

@@ -3,5 +3,6 @@ export interface AccordionScrollingOptions {
 	duration: number,
 	topOffsetSelector?: string,
 	topOffsetAdditional?: number,
-	scrollOnOpen: boolean
+	scrollOnOpen: boolean,
+	scrollOnOpenMaximumScreenWidth?: number 
 }

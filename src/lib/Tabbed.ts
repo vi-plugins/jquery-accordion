@@ -72,7 +72,7 @@ export default class Animation extends JQueryModuleBase {
 			}
 
 			// fill child markup with text from accordion titleLink
-			this.$element.find('.accordion__tabsTitleLink').eq(index).append($(elem).text());
+			this.$element.find('.accordion__tabsTitleLink').eq(index).append($(elem).html());
 		});
 	}
 
@@ -95,19 +95,23 @@ export default class Animation extends JQueryModuleBase {
 	}
 
 	protected fitIntoParent(): boolean {
-		let contentWidth: number = this.$element.innerWidth();
-		let tabsWidth: number = 0;
-		let fits: boolean = true;
-
-		this.$element.find('.accordion__tabsPanel').each((index, elem) => {
-
-			tabsWidth = tabsWidth + $(elem).outerWidth();
-			if (tabsWidth >= contentWidth) {
-				fits = false;
-				return false;
-			}
-		});
-		return fits;
+		if (this.options.preventOverfulTabHeaders) {
+			let contentWidth: number = this.$element.innerWidth();
+			let tabsWidth: number = 0;
+			let fits: boolean = true;
+	
+			this.$element.find('.accordion__tabsPanel').each((index, elem) => {
+	
+				tabsWidth = tabsWidth + $(elem).outerWidth();
+				if (tabsWidth >= contentWidth) {
+					fits = false;
+					return false;
+				}
+			});
+			return fits;	
+		} else {
+			return true;
+		}
 	}
 
 	protected showTabs(): void {
