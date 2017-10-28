@@ -4,11 +4,7 @@
 
 https://github.com/vi-plugins/jquery-boilerplate
 
-Thanks to Jan Rembold ( https://github.com/janrembold ) for providing the boilerplate.
-
-##get started
-
-Go trough steps from jquery-boilerplate README.md
+Thanks to Jan Rembold ( https://github.com/janrembold ) for providing the jquery-boilerplate.
 
 ##Usage
 
@@ -26,13 +22,8 @@ Load scripts and initialize accordion.
 
 Default accordion markup
 
-
-
-
-### create HTML markup
-
 ```
-<div class="accordion " data-open-duration="800" data-auto-close="true">
+<div class="accordion ">
     
     <div class="accordion__panel">
         <h3 class="accordion__title"><a href="#" class="accordion__titleLink">Panel__Name</a></h3>
@@ -50,18 +41,47 @@ Default accordion markup
     
 </div>
 ```
-### include jquery
-```
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-```
 
-### init plugin
-```$('.accordion').accordion().trigger('init.accordion');
+## Behaviour
 
-```
+### Animation
+### Scrolling
+If panel content does not have enough vertical space inside viewport animation scrolling is activated.
+Without optional parameters topOffsetSelector or topOffsetAdditional it scrolls down until the panel is at the top of the visibile part of the viewport.
+### Tabbed
 
-## Events
+##Options
 
+###Animation
+
+| Option | Type | Description | Default |
+| ------ | ---- | ----------- | ------- |
+| autoClose | boolean | Opening a new panel closes already opened panels | true |
+| closeDuration | number | Time for animation to close panel content | 300 (ms) |
+| openDuration | number | Time for animation to open panel content | 300 (ms) |
+
+
+###Scrolling
+
+| Option | Type | Description | Default |
+| ------ | ---- | ----------- | ------- |
+| active | boolean | Enabled/Disabled scrolling for the accordion | true |
+| duration | number | Scrolling duration | 300ms |
+| scrollOnOpen | boolean |  | true |
+| scrollOnOpenMaximumScreenWidth? | number |  | not set |
+| topOffsetSelector? | string | Top offset element selector. Considers elements placed outside accordion stacking content. E.g. Fixed Header  | not set |
+| topOffsetAdditional? | number | Additional value (pixel) considered in scrolling. | not set |
+
+###Tabbed
+
+| Option | Type | Description | Default |
+| ------ | ---- | ----------- | ------- |
+| active | boolean | Enabled/Disabled tabs view | true |
+| minViewportWidth | number | Viewport min-width (pixel) required to display tabbed view | 0 |
+| preventOverfulTabHeaders | boolean |  | true |
+
+
+##Events
 | Event | Description | Element  |
 | ----- |-------- | ------------ |
 | before.init.accordion | Before plugin is initialized | accordion container |
