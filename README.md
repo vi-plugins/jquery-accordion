@@ -65,7 +65,7 @@ Load scripts and initialize accordion.
 </script>
 ```
 
-##Markup
+####Markup
 
 Default accordion markup.
 
@@ -103,7 +103,7 @@ Tab-View inserted markup. Only if Tab-View is activated.
 
 ##Options
 
-### Example for init with options:
+#### Example for init with options:
 ```
     $('.accordion').accordion({ 
         animation: {
@@ -121,7 +121,7 @@ Tab-View inserted markup. Only if Tab-View is activated.
 ```
 
 
-###Animation
+####animation
 
 | Option | Type | Description | Default |
 | ------ | ---- | ----------- | ------- |
@@ -129,7 +129,7 @@ Tab-View inserted markup. Only if Tab-View is activated.
 | closeDuration | number | Time for animation to close panel content | 300 (ms) |
 | openDuration | number | Time for animation to open panel content | 300 (ms) |
 
-###Scrolling
+####scrolling
 
 | Option | Type | Description | Default |
 | ------ | ---- | ----------- | ------- |
@@ -140,7 +140,7 @@ Tab-View inserted markup. Only if Tab-View is activated.
 | topOffsetSelector? | string | Top offset element selector. Considers elements placed outside accordion stacking content. E.g. Fixed Header  |  |
 | topOffsetAdditional? | number | Additional value (pixel) considered in scrolling. |  |
 
-###Tabbed
+####tabbed
 
 | Option | Type | Description | Default |
 | ------ | ---- | ----------- | ------- |
