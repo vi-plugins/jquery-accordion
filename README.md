@@ -41,15 +41,11 @@ Go trough steps from jquery-boilerplate README.md
 $('.accordion').accordion().trigger('init.accordion');
 ```
 
-## Hook events
+## Events
 
-### Animation
-
-| Event                           | Element                     | description                                      |
-| ------------------------------- |:---------------------------:| ------------------------------------------------:|
-| before.open.panel.accordion     | .accordion__panel           | After a click on a link inside a closed panel. Before content container opens  |
-| after.open.panel.accordion      | .accordion__panel           | After a click on a link inside a closed panel. After content container opened |
-| zebra stripes | are neat      |    $1 |
-
-
-### scrolling
+| Event | Element | Description  |
+| ----- |-------- | ------------ |
+| before.open.panel.accordion | After a click on a link inside a closed panel. Before content container opens | panel container | 
+| after.open.panel.accordion | After a click on a link inside a closed panel. After content container opened | panel container | 
+| before.close.panel.accordion | After a click on a link inside a opened panel. Before content container closes | panel container | 
+| after.close.panel.accordion | After a click on a link inside a opened panel. After content container closed | panel container | 
