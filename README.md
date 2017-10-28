@@ -1,58 +1,55 @@
-# jQuery Plugin Boilerplate
+#Tabbed-Accordion plugin written in jquery and typescript
+ 
+##based on jQuery Plugin Boilerplate
 
-The prime reason of this boilerplate is to kickstart maintainable and testable jQuery frontend plugins written with TypeScript.
+https://github.com/vi-plugins/jquery-boilerplate
 
+Thanks to Jan Rembold ( https://github.com/janrembold ) for providing the boilerplate.
 
-## Getting started
-### Duplicate boilerplate repository
-See https://help.github.com/articles/duplicating-a-repository/ for assistance
+##get started
 
+Go trough steps from jquery-boilerplate README.md
 
-## Development
+### create HTML markup
 
-To install all necessary packages run:
 ```
-yarn install
+<div class="accordion tabbed" data-open-duration="800" data-auto-close="true">
+    
+    <div class="accordion__panel">
+        <h3 class="accordion__title"><a href="#" class="accordion__titleLink">Panel__Name</a></h3>
+        <div class="accordion__content">
+            <div class="accordion__content__example"></div>
+        </div>
+    </div>
+    
+    <div class="accordion__panel">
+        <h3 class="accordion__title"><a href="#" class="accordion__titleLink">Panel__Name</a></h3>
+        <div class="accordion__content">
+            <div class="accordion__content__example"></div>
+        </div>
+    </div>
+    
+</div>
+```
+### include jquery
+```
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 ```
 
-NPM is also possible, if Yarn is not available for any reason
+### init plugin
 ```
-npm install
+$('.accordion').accordion().trigger('init.accordion');
 ```
 
-The build task uses [webpack](https://github.com/webpack/webpack) to bundle the modules together.
-Only minimum configuration is used at them moment (ts-loader, UglifyJS, source-map). So feel free to commit improvements.
+## Hook events
 
-### Tasks
-- `npm run build` cleans the dist folder and starts a single build with webpack
-- `npm run build:watch` same as build task but with activated watch - this is the preferred task for development
-- `npm run clean` cleans the dist folder
-- `npm test` executes the tests with mocha
+### Animation
 
-
-## Conventions - Best practices
-
-### Plugin base class - JQueryPluginBase
-The plugin is always initialized in `index.ts` and extends the `JQueryPluginBase` class.
-See https://github.com/virtualidentityag/jquery-plugin-base for more informations on the base class.
-
-Plugins and modules share a single convention. They all have `init()` and `destroy()` methods, so initialization and destruction is clearly specified.
-
-The main file `index.ts` is the plugins entry point. It is used to import and initialize the necessary modules
-and should never contain any business logic.
+| Event                           | Element                     | description                                      |
+| ------------------------------- |:---------------------------:| ------------------------------------------------:|
+| before.open.panel.accordion     | .accordion__panel           | After a click on a link inside a closed panel. Before content container opens  |
+| after.open.panel.accordion      | .accordion__panel           | After a click on a link inside a closed panel. After content container opened |
+| zebra stripes | are neat      |    $1 |
 
 
-### Module base class
-All modules should extend the class `JQueryModuleBase`. This class is also the base class of `JQueryPluginBase`
-
-Modules should do only one thing. Always keep maintainability and testability in mind. Write tests for each module.
-
-## Testing
-
-For testing we currently use plain simple mocha tests.
-
-
-## ToDo
-- Add ESLint task
-- Create releases in GitHub for base, events and boilerplate repo as soon as the boilerplate is tested in real life scenarios
-- Add test cases with headless browser and demos for usage with "real" html elements
+### scrolling
