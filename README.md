@@ -16,7 +16,8 @@ Thanks to Jan Rembold ( https://github.com/janrembold ) for providing the jquery
 After init all panels are closed. 
 It can be modified by adding ```accordion__panel--open``` class to the panel container.
 
-Click on a panel toggles, using slide animation, the visibilty of content belonging to this panel. This animation manipulates the class attribute on the panel container:
+Click on a panel toggles, using slide animation, the visibilty of content belonging to this panel. 
+This animation also manipulates the class attribute on the panel container:
 
 #### Opening:
 1. While openning : adds ``` accordion_panel--openning```
@@ -75,17 +76,13 @@ Default accordion markup.
         <h3 class="accordion__title">
             <a href="#" class="accordion__titleLink">PanelName</a>
         </h3>
-        <div class="accordion__content">
-            <div class="accordion__content__example"></div>
-        </div>
+        <div class="accordion__content"></div>
     </div>
     <div class="accordion__panel accordion__panel--open">
         <h3 class="accordion__title">
             <a href="#" class="accordion__titleLink">PanelName</a>
         </h3>
-        <div class="accordion__content">
-            <div class="accordion__content__example"></div>
-        </div>
+        <div class="accordion__content"></div>
     </div>
 </div>
 ```
@@ -120,7 +117,6 @@ Tab-View inserted markup. Only if Tab-View is activated.
     }).trigger('init.accordion');
 ```
 
-
 ####animation
 
 | Option | Type | Description | Default |
@@ -146,10 +142,12 @@ Tab-View inserted markup. Only if Tab-View is activated.
 | ------ | ---- | ----------- | ------- |
 | active | boolean | Enabled/Disabled tabs view | true |
 | minViewportWidth | number | Viewport min-width (pixel) required to display tabbed view | 0 |
-| preventOverfulTabHeaders | boolean |  | true |
+| preventOverfulTabHeaders | boolean | Enabled/Disabled check if all tabs fit in one line  | true |
 
 
 ##Events
+####animation
+
 | Event | Description | Element  |
 | ----- |-------- | ------------ |
 | before.init.accordion | Before plugin is initialized | accordion container |
@@ -158,3 +156,18 @@ Tab-View inserted markup. Only if Tab-View is activated.
 | after.open.panel.accordion | After a click on a link inside a closed panel. After content container opened | panel container | 
 | before.close.panel.accordion | After a click on a link inside a opened panel. Before content container closes | panel container | 
 | after.close.panel.accordion | After a click on a link inside a opened panel. After content container closed | panel container | 
+
+
+####scrolling
+| Event | Description | Element  |
+| ----- |-------- | ------------ |
+| before.scroll.panel.accordion | Before scrolling animations beginns | accordion container |
+| after.scroll.panel.accordion | After scrolling animations ended | accordion container |
+
+####tabbed
+| Event | Description | Element  |
+| ----- |-------- | ------------ |
+| before.show.tabs.accordion | Before switching to Tab-View | accordion container |
+| after.show.tabs.accordion | After switching to Tab-View | accordion container |
+| before.hide.tabs.accordion | Before switching to Accordion-View | accordion container |
+| after.hide.tabs.accordion | After switching to Accordion-View | accordion container |
