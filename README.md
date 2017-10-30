@@ -36,7 +36,6 @@ By default scrolling option is activated.
 If a panel content does not have enough vertical space inside viewport animation scrolling is activated.
 Without optional parameters topOffsetSelector or topOffsetAdditional it scrolls down until the panel is at the top of the visibile part of the viewport.
 
-
 ### Tab-View
 By default the Tab-View option is activated.
 
@@ -50,7 +49,6 @@ Toggle between Tab-View and Accordion-View happens when the tabs have enough spa
 
 
 Tab-View injects additional markup and hides the panel title container.
-
 
 ##Usage
 
@@ -157,17 +155,17 @@ Tab-View inserted markup. Only if Tab-View is activated.
 | before.close.panel.accordion | After a click on a link inside a opened panel. Before content container closes | panel container | 
 | after.close.panel.accordion | After a click on a link inside a opened panel. After content container closed | panel container | 
 
-
 ####scrolling
-| Event | Description | Element  |
-| ----- |-------- | ------------ |
+| Event | Description | Element  | Returns|
+| ----- |-------- | ------------ | ------- |
 | before.scroll.panel.accordion | Before scrolling animations beginns | accordion container |
 | after.scroll.panel.accordion | After scrolling animations ended | accordion container |
-
+ 
 ####tabbed
 | Event | Description | Element  |
 | ----- |-------- | ------------ |
 | before.show.tabs.accordion | Before switching to Tab-View | accordion container |
-| after.show.tabs.accordion | After switching to Tab-View | accordion container |
+| after.show.tabs.accordion | After switched to Tab-View | accordion container |
 | before.hide.tabs.accordion | Before switching to Accordion-View | accordion container |
-| after.hide.tabs.accordion | After switching to Accordion-View | accordion container |
+| after.hide.tabs.accordion | After switched to Accordion-View | accordion container |
+|

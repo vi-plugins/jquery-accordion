@@ -17,6 +17,7 @@
 		height: 50px;
 		background-color: lightblue;
 		top: 0;
+        z-index: 1;
 	}
 
 	body {
@@ -114,12 +115,17 @@
                 },
                 scrolling: {
                     topOffsetSelector: '.my-header',
-                    scrollOnOpen: true,
-                    scrollOnOpenMaximumScreenWidth: 480 }
+                    scrollOnOpen: true
+                }
 		    }).trigger('init.accordion');
 
-		    // Destroy plugin
-//			 $('.accordion').trigger('destroy.accordion');
+            $('.accordion').on('before.scroll.panel.accordion',function(){
+                console.log('before.scroll');
+            });
+
+            $('.accordion').on('after.scroll.panel.accordion',function(){
+                console.log('after.scroll');
+            });
 
 		});
 	</script>

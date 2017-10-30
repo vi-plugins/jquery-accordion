@@ -10,6 +10,7 @@ export default class Scrolling extends JQueryModuleBase {
 	}
 
 	init(): void {
+
 		this.$element.children().on('before.close.panel.accordion', (e, $activePanel) => {
 			e.preventDefault();
 			if ($activePanel) {
@@ -17,12 +18,21 @@ export default class Scrolling extends JQueryModuleBase {
 			}
 		});
 
-/*		if (this.options.scrollOnOpen) {
-			this.$element.children().on('after.open.panel.accordion', (e, $activePanel) => {
-				e.preventDefault();
+		console.log(`scroll on open: ${this.options.scrollOnOpen}`);
+
+		if ( this.options.scrollOnOpen) {
+			this.$element.children().on('before.open.panel.accordion', (e) => {
+				$(e.target).trigger('before.close.panel.accordion', $(e.target));
+			});
+		}
+
+		/*if (this.options.scrollOnOpen) {
+			this.$element.children().on('before.open.panel.accordion', (e) => {
+				e.preventDefault;
 				let scrollingEnabled = this.options.scrollOnOpenMaximumScreenWidth == null || Scrolling.getWindowWidth() <= this.options.scrollOnOpenMaximumScreenWidth;
-				if ($activePanel && scrollingEnabled) {
-					let targetScrollTop = this.getScrollTopPosition($($activePanel));
+				if ($(e.target) && scrollingEnabled) {
+					let targetScrollTop = this.getScrollTopPosition($(e.target));
+					console.log(`scroll top before open :${targetScrollTop}`);
 					this.animateScrolling(targetScrollTop);
 				}
 			});
@@ -43,6 +53,7 @@ export default class Scrolling extends JQueryModuleBase {
 		}
 
 		let scrollTopPosition:number = this.getScrollTopPosition($activePanel);
+		/*console.log(`scroll top calc :${scrollTopPosition}`);*/
 
 		if (!this.isPanelInViewport(scrollTopPosition - openedContentHeight) || !this.isElementInViewport($activePanel)) {
 			this.animateScrolling(scrollTopPosition - openedContentHeight);
@@ -84,9 +95,9 @@ export default class Scrolling extends JQueryModuleBase {
 		);
 	}
 
-/*	private static getWindowWidth() {
+	private static getWindowWidth() {
 		return window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-	}*/
+	}
 
 
 	destroy(): void {
