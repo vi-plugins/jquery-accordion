@@ -20,12 +20,6 @@ export default class Scrolling extends JQueryModuleBase {
 
 		console.log(`scroll on open: ${this.options.scrollOnOpen}`);
 
-/*		if ( this.options.scrollOnOpen) {
-			this.$element.children().on('before.open.panel.accordion', (e) => {
-				$(e.target).trigger('before.close.panel.accordion', $(e.target));
-			});
-		}*/
-
 		if (this.options.scrollOnOpen) {
 			this.$element.children().on('before.open.panel.accordion', (e) => {
 				e.preventDefault;
