@@ -130,9 +130,9 @@ Tab-View inserted markup. Only if Tab-View is activated.
 | active | boolean | Enabled/Disabled scrolling for the accordion | true |
 | duration | number | Scrolling duration | 300ms |
 | scrollOnOpen | boolean | Activates scroll on opening ( default closing ) a panel | false |
-| scrollOnOpenMaximumScreenWidth? | number | In combination with scrollOnOpen. If Viewport width is heigher than parameter scrollOnOpen is deactivated | |
-| topOffsetSelector? | string | Top offset element selector. Considers elements placed outside accordion stacking content. E.g. Fixed Header  |  |
-| topOffsetAdditional? | number | Additional value (pixel) considered in scrolling. |  |
+| scrollOnOpenMaximumScreenWidth? | number | In combination with scrollOnOpen. If Viewport width is heigher than parameter scrollOnOpen is deactivated | false |
+| topOffsetSelector? | string | Top offset element selector. Considers elements placed outside accordion stacking content. E.g. Fixed Header  | false |
+| topOffsetAdditional? | number | Additional value (pixel) considered in scrolling. | false |
 
 #### tabbed
 
