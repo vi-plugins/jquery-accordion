@@ -1,4 +1,4 @@
-#jQuery Responsive Tabbed-Accordion Plugin 
+# jQuery Responsive Tabbed-Accordion Plugin 
 
 Written in typescript. By default it implements a simple accordion.
 
@@ -50,7 +50,7 @@ Toggle between Tab-View and Accordion-View happens when the tabs have enough spa
 
 Tab-View injects additional markup and hides the panel title container.
 
-##Usage
+## Usage
 
 Load scripts and initialize accordion.
 
@@ -96,7 +96,7 @@ Tab-View inserted markup. Only if Tab-View is activated.
 ```
 
 
-##Options
+## Options
 
 #### Example for init with options:
 ```
@@ -115,7 +115,7 @@ Tab-View inserted markup. Only if Tab-View is activated.
     }).trigger('init.accordion');
 ```
 
-####animation
+#### animation
 
 | Option | Type | Description | Default |
 | ------ | ---- | ----------- | ------- |
@@ -123,7 +123,7 @@ Tab-View inserted markup. Only if Tab-View is activated.
 | closeDuration | number | Time for animation to close panel content | 300 (ms) |
 | openDuration | number | Time for animation to open panel content | 300 (ms) |
 
-####scrolling
+#### scrolling
 
 | Option | Type | Description | Default |
 | ------ | ---- | ----------- | ------- |
@@ -134,7 +134,7 @@ Tab-View inserted markup. Only if Tab-View is activated.
 | topOffsetSelector? | string | Top offset element selector. Considers elements placed outside accordion stacking content. E.g. Fixed Header  |  |
 | topOffsetAdditional? | number | Additional value (pixel) considered in scrolling. |  |
 
-####tabbed
+#### tabbed
 
 | Option | Type | Description | Default |
 | ------ | ---- | ----------- | ------- |
@@ -143,8 +143,8 @@ Tab-View inserted markup. Only if Tab-View is activated.
 | preventOverfulTabHeaders | boolean | Enabled/Disabled check if all tabs fit in one line  | true |
 
 
-##Events
-####animation
+## Events
+#### animation
 
 | Event | Description | Element  |
 | ----- |-------- | ------------ |
@@ -155,13 +155,13 @@ Tab-View inserted markup. Only if Tab-View is activated.
 | before.close.panel.accordion | After a click on a link inside a opened panel. Before content container closes | panel container | 
 | after.close.panel.accordion | After a click on a link inside a opened panel. After content container closed | panel container | 
 
-####scrolling
+#### scrolling
 | Event | Description | Element  | Returns|
 | ----- |-------- | ------------ | ------- |
 | before.scroll.panel.accordion | Before scrolling animations beginns | accordion container |
 | after.scroll.panel.accordion | After scrolling animations ended | accordion container |
  
-####tabbed
+#### tabbed
 | Event | Description | Element  |
 | ----- |-------- | ------------ |
 | before.show.tabs.accordion | Before switching to Tab-View | accordion container |

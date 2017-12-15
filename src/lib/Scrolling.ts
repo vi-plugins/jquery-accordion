@@ -11,15 +11,12 @@ export default class Scrolling extends JQueryModuleBase {
 
 	init(): void {
 
-		console.log(`scroll on open: ${this.options.scrollOnOpen}`);
-
 		if (this.options.scrollOnOpen) {
-			this.$element.children().on('before.open.panel.accordion', (e) => {
-				e.preventDefault;
+			this.$element.children().on('after.open.panel.accordion', (e, $activePanel) => {
+				e.preventDefault();
 				let scrollingEnabled = this.options.scrollOnOpenMaximumScreenWidth == null || Scrolling.getWindowWidth() <= this.options.scrollOnOpenMaximumScreenWidth;
-				if ($(e.target) && scrollingEnabled) {
-					let targetScrollTop = this.getScrollTopPosition($(e.target));
-					console.log(`scroll top before open :${targetScrollTop}`);
+				if ($activePanel && scrollingEnabled) {
+					let targetScrollTop = this.getScrollTopPosition($($activePanel));
 					this.animateScrolling(targetScrollTop);
 				}
 			});
@@ -47,7 +44,6 @@ export default class Scrolling extends JQueryModuleBase {
 		}
 
 		let scrollTopPosition:number = this.getScrollTopPosition($activePanel);
-		/*console.log(`scroll top calc :${scrollTopPosition}`);*/
 
 		if (!this.isPanelInViewport(scrollTopPosition - openedContentHeight) || !this.isElementInViewport($activePanel)) {
 			this.animateScrolling(scrollTopPosition - openedContentHeight);
