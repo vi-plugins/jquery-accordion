@@ -4,7 +4,7 @@ Written in typescript. By default it implements a simple accordion.
 
 Optional: vertical scrolling and an alternative Tabs-View.  
  
-##Based on jQuery Plugin Boilerplate
+## Based on jQuery Plugin Boilerplate
 
 https://github.com/vi-plugins/jquery-boilerplate
 
@@ -28,7 +28,7 @@ This animation also manipulates the class attribute on the panel container:
 2. Animation ended: removes ``` accordion_panel--open```, removes ``` accordion_panel--closing```,
 
 By default click on a panel also closes all other panels using above described closing behaviour. 
-Closing and oppening have been added for css transform animations while animation is running.
+``` .accordion_panel--closing``` and ``` accordion_panel--openning``` have been added for css transform animations while animation is running.
 
 ### Scrolling
 By default scrolling option is activated.
@@ -129,8 +129,8 @@ Tab-View inserted markup. Only if Tab-View is activated.
 | ------ | ---- | ----------- | ------- |
 | active | boolean | Enabled/Disabled scrolling for the accordion | true |
 | duration | number | Scrolling duration | 300ms |
-| scrollOnOpen | boolean |  | true |
-| scrollOnOpenMaximumScreenWidth? | number |  | |
+| scrollOnOpen | boolean | Activates scroll on opening ( default closing ) a panel | false |
+| scrollOnOpenMaximumScreenWidth? | number | In combination with scrollOnOpen. If Viewport width is heigher than parameter scrollOnOpen is deactivated | |
 | topOffsetSelector? | string | Top offset element selector. Considers elements placed outside accordion stacking content. E.g. Fixed Header  |  |
 | topOffsetAdditional? | number | Additional value (pixel) considered in scrolling. |  |
 
@@ -156,8 +156,8 @@ Tab-View inserted markup. Only if Tab-View is activated.
 | after.close.panel.accordion | After a click on a link inside a opened panel. After content container closed | panel container | 
 
 #### scrolling
-| Event | Description | Element  | Returns|
-| ----- |-------- | ------------ | ------- |
+| Event | Description | Element  |
+| ----- |-------- | ------------ |
 | before.scroll.panel.accordion | Before scrolling animations beginns | accordion container |
 | after.scroll.panel.accordion | After scrolling animations ended | accordion container |
  
