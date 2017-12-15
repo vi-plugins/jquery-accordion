@@ -64,7 +64,7 @@ Load scripts and initialize accordion.
 </script>
 ```
 
-####Markup
+#### Markup
 
 Default accordion markup.
 
