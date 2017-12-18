@@ -124,8 +124,7 @@ export default class Animation extends JQueryModuleBase {
 			activePanelIndex = 0;
 
 			this.$element.find('.accordion__panel').eq(activePanelIndex)
-				.addClass('accordion__panel--open')
-				.trigger('after.open.panel.accordion');
+				.addClass('accordion__panel--open');
 		}
 
 		// remove all active tabs panels
