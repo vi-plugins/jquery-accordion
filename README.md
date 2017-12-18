@@ -20,15 +20,15 @@ Click on a panel toggles, using slide animation, the visibilty of content belong
 This animation also manipulates the class attribute on the panel container:
 
 #### Opening:
-1. While openning : adds ``` accordion_panel--openning```
-2. Animation ended : adds ``` accordion_panel--open```, removes ``` accordion_panel--openning```,
+1. While openning : adds ``` accordion__panel--openning```
+2. Animation ended : adds ``` accordion__panel--open```, removes ``` accordion__panel--openning```,
 
 #### Closing:
-1. While closing: adds ``` .accordion_panel--closing```
-2. Animation ended: removes ``` accordion_panel--open```, removes ``` accordion_panel--closing```,
+1. While closing: adds ``` .accordion__panel--closing```
+2. Animation ended: removes ``` accordion__panel--open```, removes ``` accordion__panel--closing```,
 
 By default click on a panel also closes all other panels using above described closing behaviour. 
-``` .accordion_panel--closing``` and ``` accordion_panel--openning``` have been added for css transform animations while animation is running.
+``` accordion__panel--closing``` and ``` accordion__panel--openning``` have been added for css transform animations while animation is running.
 
 ### Scrolling
 By default scrolling option is activated.
