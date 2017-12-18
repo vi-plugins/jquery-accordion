@@ -10,14 +10,26 @@ export default class Animation extends JQueryModuleBase {
 
 	init(): void {
 
-		if (this.$element.attr('data-auto-close')) {
-			this.options.autoClose = this.$element.data('auto-close');
-		}
-
+		this.checkDataAttributes();
 		this.$element.find('.accordion__titleLink').on('click.panel.accordion', (e) => {
 			e.preventDefault();
 			this.togglePanel($(e.currentTarget));
 		});
+	}
+
+	protected checkDataAttributes(): void {
+
+		if (this.$element.data('auto-close')) {
+			this.options.autoClose = this.$element.data('auto-close');
+		}
+
+		if ( this.$element.data('open-duration')) {
+			this.options.openDuration = this.$element.data('open-duration');
+		}
+
+		if ( this.$element.data('close-duration')) {
+			this.options.openDuration = this.$element.data('close-duration');
+		}
 	}
 
 	protected togglePanel($titleLink: JQuery): void {
@@ -58,6 +70,9 @@ export default class Animation extends JQueryModuleBase {
 		$panel
 			.trigger('before.close.panel.accordion', [$activePanel || null])
 			.addClass('accordion__panel--closing');
+
+		if( this.$element.data())
+
 
 		$content.slideUp(this.options.closeDuration, () => {
 			$panel

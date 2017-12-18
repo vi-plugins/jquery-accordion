@@ -8,7 +8,7 @@
 <body>
 <style>
 	.accordion__content__example {
-		min-height: 300px;
+		min-height: 800px;
 	}
 
 	.my-header {
@@ -17,6 +17,7 @@
 		height: 50px;
 		background-color: lightblue;
 		top: 0;
+        z-index: 1;
 	}
 
 	body {
@@ -27,7 +28,7 @@
 		Header
 	</header>
 	<h3>Accordion - Default</h3>
-	<div class="accordion tabbed" data-open-duration="800" data-auto-close="true">
+	<div class="accordion tabbed" data-auto-close="true">
 		<div class="accordion__panel">
 			<h3 class="accordion__title"><a href="#" class="accordion__titleLink">Panel 1</a></h3>
 			<div class="accordion__content">
@@ -35,7 +36,7 @@
 				<div class="accordion__content__example"></div>
 			</div>
 		</div>
-		<div class="accordion__panel">
+		<div class="accordion__panel accordion__panel--open">
 			<h3 class="accordion__title"><a href="#" class="accordion__titleLink">Panel 2</a></h3>
 			<div class="accordion__content">
 				### PANEL2 ###
@@ -79,41 +80,21 @@
 		</div>
 	</div>
 
-	<h3>Accordion - not closing panels automatically</h3>
-	<div class="accordion" data-auto-close="false">
-		<div class="accordion__panel accordion__panel--open">
-			<h3 class="accordion__title"><a href="#" class="accordion__titleLink">Text</a></h3>
-			<div class="accordion__content">
-				### PANEL1 ###
-				<div class="accordion__content__example"></div>
-			</div>
-		</div>
-		<div class="accordion__panel">
-			<h3 class="accordion__title"><a href="#" class="accordion__titleLink">Text</a></h3>
-			<div class="accordion__content">
-				### PANEL2 ###
-				<div class="accordion__content__example"></div>
-			</div>
-		</div>
-		<div class="accordion__panel">
-			<h3 class="accordion__title"><a href="#" class="accordion__titleLink">Text</a></h3>
-			<div class="accordion__content">
-				### PANEL3 ###
-				<div class="accordion__content__example"></div>
-			</div>
-		</div>
-	</div>
-
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<script src="../dist/accordion.min.js"></script>
 	<script>
 		$(document).ready(function() {
-		    $('.accordion').accordion({ tabbed: {minViewportWidth: 700}, scrolling: {topOffsetSelector: '.my-header', scrollOnOpen: true, scrollOnOpenMaximumScreenWidth: 480 }}).trigger('init.accordion');
-
-		    // Destroy plugin
-//			 $('.accordion').trigger('destroy.accordion');
-
+		    $('.accordion').accordion({
+                tabbed: {
+                    minViewportWidth: 700
+                },
+                scrolling: {
+                    topOffsetSelector: '.my-header',
+                    scrollOnOpen: true
+                }
+		    }).trigger('init.accordion');
 		});
+
 	</script>
 </body>
 </html>

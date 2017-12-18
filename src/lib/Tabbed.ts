@@ -1,7 +1,10 @@
 import {JQueryModuleBase} from "jquery-base";
 import {AccordionTabbedOptions} from "../interfaces/TabbedOptions";
+ import EventHelper from 'jquery-events';
 
 export default class Animation extends JQueryModuleBase {
+
+	private tabsActive: boolean = false;
 
 	constructor(protected $element: JQuery,
 				protected options: AccordionTabbedOptions) {
@@ -39,13 +42,42 @@ export default class Animation extends JQueryModuleBase {
 
 	protected toggleView(): void {
 
-		if (this.fitIntoParent() && $(window).outerWidth() >= this.options.minViewportWidth) {
-			this.showTabs();
+		let tabsFitCheck: boolean = false;
+
+		if (this.options.preventOverfulTabHeaders === true ){
+			tabsFitCheck = this.fitIntoParent();
+		}else {
+			tabsFitCheck = true;
+		}
+
+		if (tabsFitCheck && $(window).outerWidth() >= this.options.minViewportWidth) {
+
+			// only if tabs view status changes
+			if (this.tabsActive === false ) {
+				EventHelper.wrapEvents(
+					this.$element,
+					'show.tabs.accordion',
+					() => {
+						this.showTabs();
+						this.tabsActive = true;
+					}
+				);
+			}
 		} else {
-			this.hideTabs();
+
+			// only if tabs view status changes
+			if (this.tabsActive === true ) {
+				EventHelper.wrapEvents(
+					this.$element,
+					'hide.tabs.accordion',
+					() => {
+						this.hideTabs();
+						this.tabsActive = false;
+					}
+				);
+			}
 		}
 	}
-
 
 	protected renderTabs(): void {
 		// inserted markup
@@ -95,7 +127,7 @@ export default class Animation extends JQueryModuleBase {
 	}
 
 	protected fitIntoParent(): boolean {
-		if (this.options.preventOverfulTabHeaders) {
+
 			let contentWidth: number = this.$element.innerWidth();
 			let tabsWidth: number = 0;
 			let fits: boolean = true;
@@ -108,10 +140,7 @@ export default class Animation extends JQueryModuleBase {
 					return false;
 				}
 			});
-			return fits;	
-		} else {
-			return true;
-		}
+			return fits;
 	}
 
 	protected showTabs(): void {

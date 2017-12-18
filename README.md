@@ -1,58 +1,170 @@
-# jQuery Plugin Boilerplate
+# jQuery Responsive Tabbed-Accordion Plugin 
 
-The prime reason of this boilerplate is to kickstart maintainable and testable jQuery frontend plugins written with TypeScript.
+Written in typescript. By default it implements a simple accordion.
+
+Optional: vertical scrolling and an alternative Tabs-View.  
+ 
+## Based on jQuery Plugin Boilerplate
+
+https://github.com/vi-plugins/jquery-boilerplate
+
+Thanks to Jan Rembold ( https://github.com/janrembold ) for providing the jquery-plugin-boilerplate.
+
+## Behaviour
+
+### Animation
+After init all panels are closed. 
+It can be modified by adding ```accordion__panel--open``` class to the panel container.
+
+Click on a panel toggles, using slide animation, the visibilty of content belonging to this panel. 
+This animation also manipulates the class attribute on the panel container:
+
+#### Opening:
+1. While openning : adds ``` accordion__panel--openning```
+2. Animation ended : adds ``` accordion__panel--open```, removes ``` accordion__panel--openning```,
+
+#### Closing:
+1. While closing: adds ``` .accordion__panel--closing```
+2. Animation ended: removes ``` accordion__panel--open```, removes ``` accordion__panel--closing```,
+
+By default click on a panel also closes all other panels using above described closing behaviour. 
+``` accordion__panel--closing``` and ``` accordion__panel--openning``` have been added for css transform animations while animation is running.
+
+### Scrolling
+By default scrolling option is activated.
+
+If a panel content does not have enough vertical space inside viewport animation scrolling is activated.
+Without optional parameters topOffsetSelector or topOffsetAdditional it scrolls down until the panel is at the top of the visibile part of the viewport.
+
+### Tab-View
+By default the Tab-View option is activated.
+
+When the min-width requirements are matched (default set to 0) 
+and all tabs have enough horizontal space to fit inside one line, the Accordion-View changes to Tab-View.
+
+Toggle between Tab-View and Accordion-View happens when the tabs have enough space or not and also considers already opened panels.
+1. If there is more than one panel opened inside the Accordion-View, the switch to Tab-View will close all panels but the first opened.
+2. If none is opened the first tab will be opened. 
+3. The tab opened in Tab-View defines the opened accordion panel when switched from Tab-View to Accordion-View  
 
 
-## Getting started
-### Duplicate boilerplate repository
-See https://help.github.com/articles/duplicating-a-repository/ for assistance
+Tab-View injects additional markup and hides the panel title container.
 
+## Usage
 
-## Development
+Load scripts and initialize accordion.
 
-To install all necessary packages run:
 ```
-yarn install
+<script src="js/jquery.min.js"></script>
+<script src="../dist/accordion.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.accordion').accordion().trigger('init.accordion');
+    });
+</script>
 ```
 
-NPM is also possible, if Yarn is not available for any reason
+#### Markup
+
+Default accordion markup.
+
 ```
-npm install
+<div class="accordion">
+    <div class="accordion__panel">
+        <h3 class="accordion__title">
+            <a href="#" class="accordion__titleLink">PanelName</a>
+        </h3>
+        <div class="accordion__content"></div>
+    </div>
+    <div class="accordion__panel accordion__panel--open">
+        <h3 class="accordion__title">
+            <a href="#" class="accordion__titleLink">PanelName</a>
+        </h3>
+        <div class="accordion__content"></div>
+    </div>
+</div>
 ```
 
-The build task uses [webpack](https://github.com/webpack/webpack) to bundle the modules together.
-Only minimum configuration is used at them moment (ts-loader, UglifyJS, source-map). So feel free to commit improvements.
+Tab-View javascript inserted markup. Only if Tab-View is activated.
 
-### Tasks
-- `npm run build` cleans the dist folder and starts a single build with webpack
-- `npm run build:watch` same as build task but with activated watch - this is the preferred task for development
-- `npm run clean` cleans the dist folder
-- `npm test` executes the tests with mocha
-
-
-## Conventions - Best practices
-
-### Plugin base class - JQueryPluginBase
-The plugin is always initialized in `index.ts` and extends the `JQueryPluginBase` class.
-See https://github.com/virtualidentityag/jquery-plugin-base for more informations on the base class.
-
-Plugins and modules share a single convention. They all have `init()` and `destroy()` methods, so initialization and destruction is clearly specified.
-
-The main file `index.ts` is the plugins entry point. It is used to import and initialize the necessary modules
-and should never contain any business logic.
+```
+<ul class="accordion__tabs">
+    <li class="accordion__tabsPanel">
+        <a class="accordion__tabsTitleLink"></a>
+    </li>
+</ul> 
+```
 
 
-### Module base class
-All modules should extend the class `JQueryModuleBase`. This class is also the base class of `JQueryPluginBase`
+## Options
 
-Modules should do only one thing. Always keep maintainability and testability in mind. Write tests for each module.
+#### Example for init with options:
+```
+    $('.accordion').accordion({ 
+        animation: {
+            autoClose: false
+        },
+        tabbed: {
+            minViewportWidth: 700
+        }, 
+        scrolling: {
+            topOffsetSelector: '.my-header', 
+            scrollOnOpen: true, 
+            scrollOnOpenMaximumScreenWidth: 480
+        }
+    }).trigger('init.accordion');
+```
 
-## Testing
+#### animation
 
-For testing we currently use plain simple mocha tests.
+| Option | Type | Description | Default |
+| ------ | ---- | ----------- | ------- |
+| autoClose | boolean | Opening a new panel closes already opened panels | true |
+| closeDuration | number | Time for animation to close panel content | 300 (ms) |
+| openDuration | number | Time for animation to open panel content | 300 (ms) |
+
+#### scrolling
+
+| Option | Type | Description | Default |
+| ------ | ---- | ----------- | ------- |
+| active | boolean | Enabled/Disabled scrolling for the accordion | true |
+| duration | number | Scrolling duration | 300ms |
+| scrollOnOpen | boolean | Activates scroll on opening ( default closing ) a panel | false |
+| scrollOnOpenMaximumScreenWidth? | number | In combination with scrollOnOpen. If Viewport width is heigher than parameter scrollOnOpen is deactivated | false |
+| topOffsetSelector? | string | Top offset element selector. Considers elements placed outside accordion stacking content. E.g. Fixed Header  | false |
+| topOffsetAdditional? | number | Additional value (pixel) considered in scrolling. | false |
+
+#### tabbed
+
+| Option | Type | Description | Default |
+| ------ | ---- | ----------- | ------- |
+| active | boolean | Enabled/Disabled tabs view | true |
+| minViewportWidth | number | Viewport min-width (pixel) required to display tabbed view | 0 |
+| preventOverfulTabHeaders | boolean | Enabled/Disabled check if all tabs fit in one line  | true |
 
 
-## ToDo
-- Add ESLint task
-- Create releases in GitHub for base, events and boilerplate repo as soon as the boilerplate is tested in real life scenarios
-- Add test cases with headless browser and demos for usage with "real" html elements
+## Events
+#### animation
+
+| Event | Description | Element  |
+| ----- |-------- | ------------ |
+| before.init.accordion | Before plugin is initialized | accordion container |
+| after.init.accordion | After plugin has been initialized | accordion container |
+| before.open.panel.accordion | After a click on a link inside a closed panel. Before content container opens | panel container | 
+| after.open.panel.accordion | After a click on a link inside a closed panel. After content container opened | panel container | 
+| before.close.panel.accordion | After a click on a link inside a opened panel. Before content container closes | panel container | 
+| after.close.panel.accordion | After a click on a link inside a opened panel. After content container closed | panel container | 
+
+#### scrolling
+| Event | Description | Element  |
+| ----- |-------- | ------------ |
+| before.scroll.panel.accordion | Before scrolling animations beginns | accordion container |
+| after.scroll.panel.accordion | After scrolling animations ended | accordion container |
+ 
+#### tabbed
+| Event | Description | Element  |
+| ----- |-------- | ------------ |
+| before.show.tabs.accordion | Before switching to Tab-View | accordion container |
+| after.show.tabs.accordion | After switched to Tab-View | accordion container |
+| before.hide.tabs.accordion | Before switching to Accordion-View | accordion container |
+| after.hide.tabs.accordion | After switched to Accordion-View | accordion container |
