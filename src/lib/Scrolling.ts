@@ -11,6 +11,13 @@ export default class Scrolling extends JQueryModuleBase {
 
 	init(): void {
 
+		this.$element.children().on('before.close.panel.accordion', (e, $activePanel) => {
+			e.preventDefault();
+			if ($activePanel) {
+				this.calcScroll($activePanel);
+			}
+		});
+
 		if (this.options.scrollOnOpen) {
 			this.$element.children().on('after.open.panel.accordion', (e, $activePanel) => {
 				e.preventDefault();
@@ -18,13 +25,6 @@ export default class Scrolling extends JQueryModuleBase {
 				if ($activePanel && scrollingEnabled) {
 					let targetScrollTop = this.getScrollTopPosition($($activePanel));
 					this.animateScrolling(targetScrollTop);
-				}
-			});
-		} else {
-			this.$element.children().on('before.close.panel.accordion', (e, $activePanel) => {
-				e.preventDefault();
-				if ($activePanel) {
-					this.calcScroll($activePanel);
 				}
 			});
 		}
