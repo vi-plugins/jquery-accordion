@@ -85,7 +85,7 @@ Default accordion markup.
 </div>
 ```
 
-Tab-View inserted markup. Only if Tab-View is activated.
+Tab-View javascript inserted markup. Only if Tab-View is activated.
 
 ```
 <ul class="accordion__tabs">
@@ -168,4 +168,3 @@ Tab-View inserted markup. Only if Tab-View is activated.
 | after.show.tabs.accordion | After switched to Tab-View | accordion container |
 | before.hide.tabs.accordion | Before switching to Accordion-View | accordion container |
 | after.hide.tabs.accordion | After switched to Accordion-View | accordion container |
-|
