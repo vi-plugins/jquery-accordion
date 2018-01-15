@@ -131,9 +131,9 @@ export default class Animation extends JQueryModuleBase {
 			let contentWidth: number = this.$element.innerWidth();
 			let tabsWidth: number = 0;
 			let fits: boolean = true;
-	
+
 			this.$element.find('.accordion__tabsPanel').each((index, elem) => {
-	
+
 				tabsWidth = tabsWidth + $(elem).outerWidth();
 				if (tabsWidth >= contentWidth) {
 					fits = false;
@@ -157,8 +157,7 @@ export default class Animation extends JQueryModuleBase {
 			activePanelIndex = 0;
 
 			this.$element.find('.accordion__panel').eq(activePanelIndex)
-				.addClass('accordion__panel--open')
-				.trigger('after.open.panel.accordion');
+				.addClass('accordion__panel--open');
 		}
 
 		// remove all active tabs panels
