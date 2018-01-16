@@ -146,12 +146,12 @@ Tab-View javascript inserted markup. Only if Tab-View is activated.
 ## Events
 #### animation
 
-| Event | Description | Element  |
-| ----- |-------- | ------------ |
+| Event | Description | Element  | Return |
+| ----- |-------- | ------------ | ----- |
 | before.init.accordion | Before plugin is initialized | accordion container |
 | after.init.accordion | After plugin has been initialized | accordion container |
 | before.open.panel.accordion | After a click on a link inside a closed panel. Before content container opens | panel container | 
-| after.open.panel.accordion | After a click on a link inside a closed panel. After content container opened | panel container | 
+| after.open.panel.accordion | After a click on a link inside a closed panel. After content container opened | panel container | {panel, position } |
 | before.close.panel.accordion | After a click on a link inside a opened panel. Before content container closes | panel container | 
 | after.close.panel.accordion | After a click on a link inside a opened panel. After content container closed | panel container | 
 
