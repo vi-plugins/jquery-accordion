@@ -19,11 +19,12 @@ export default class Scrolling extends JQueryModuleBase {
 		});
 
 		if (this.options.scrollOnOpen) {
-			this.$element.children().on('after.open.panel.accordion', (e, $activePanel) => {
+			this.$element.children().on('after.open.panel.accordion', (e, value) => {
 				e.preventDefault();
 				let scrollingEnabled = this.options.scrollOnOpenMaximumScreenWidth == null || Scrolling.getWindowWidth() <= this.options.scrollOnOpenMaximumScreenWidth;
-				if ($activePanel && scrollingEnabled) {
-					let targetScrollTop = this.getScrollTopPosition($($activePanel));
+
+				if (value.panel && scrollingEnabled) {
+					let targetScrollTop = this.getScrollTopPosition(value.panel);
 					this.animateScrolling(targetScrollTop);
 				}
 			});

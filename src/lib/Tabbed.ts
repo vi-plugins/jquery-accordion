@@ -1,6 +1,6 @@
 import {JQueryModuleBase} from "jquery-base";
 import {AccordionTabbedOptions} from "../interfaces/TabbedOptions";
- import EventHelper from 'jquery-events';
+import EventHelper from 'jquery-events';
 
 export default class Animation extends JQueryModuleBase {
 
@@ -123,7 +123,7 @@ export default class Animation extends JQueryModuleBase {
 		// set new active accordion panel and trigger event
 		this.$element.find('.accordion__panel').eq(activeTabIndex)
 			.addClass('accordion__panel--open')
-			.trigger('after.open.panel.accordion');
+			.trigger('after.open.panel.accordion',{panel: $(event.target).parent() ,position: activeTabIndex});
 	}
 
 	protected fitIntoParent(): boolean {
