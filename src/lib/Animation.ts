@@ -17,18 +17,26 @@ export default class Animation extends JQueryModuleBase {
 		});
 	}
 
+	protected setActivePanel(index: number):void {
+		this.$element.find('.accordion__panel').eq(index).addClass('accordion__panel--open');
+	}
+
 	protected checkDataAttributes(): void {
 
 		if (this.$element.data('auto-close')) {
 			this.options.autoClose = this.$element.data('auto-close');
 		}
 
-		if ( this.$element.data('open-duration')) {
+		if (this.$element.data('open-duration')) {
 			this.options.openDuration = this.$element.data('open-duration');
 		}
 
-		if ( this.$element.data('close-duration')) {
-			this.options.openDuration = this.$element.data('close-duration');
+		if (this.$element.data('close-duration')) {
+			this.options.closeDuration = this.$element.data('close-duration');
+		}
+
+		if (this.options.openedPanelIndex !== undefined){
+			this.setActivePanel(this.options.openedPanelIndex);
 		}
 	}
 
@@ -61,9 +69,20 @@ export default class Animation extends JQueryModuleBase {
 			$panel
 				.addClass('accordion__panel--open')
 				.removeClass('accordion__panel--opening')
-				.trigger('after.open.panel.accordion', $panel);
-			$content.removeAttr('style');
+				.trigger('after.open.panel.accordion', {panel: $panel, position: this.getPanelPosition()});
+				$content.removeAttr('style');
 		});
+	}
+
+	protected getPanelPosition(): number{
+		let opened: number = null;
+		this.$element.find('.accordion__panel').each( (index, elem) => {
+			if ( $(elem).hasClass('accordion__panel--open') ) {
+				opened = index;
+				return
+			}
+		});
+		return opened;
 	}
 
 	protected hidePanel($content: JQuery, $panel: JQuery, $activePanel?: JQuery): void {

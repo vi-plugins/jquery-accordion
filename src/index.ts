@@ -65,6 +65,7 @@ import './scss/accordion.scss';
 
 			this.tabbed = new Tabbed(this.$element, this.options.tabbed);
 			this.tabbed.init();
+
 		}
 
 		/** local destroy overwrites JQueryPluginBase destroy method */

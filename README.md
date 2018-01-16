@@ -120,15 +120,15 @@ Tab-View javascript inserted markup. Only if Tab-View is activated.
 | Option | Type | Description | Default |
 | ------ | ---- | ----------- | ------- |
 | autoClose | boolean | Opening a new panel closes already opened panels | true |
-| closeDuration | number | Time for animation to close panel content | 300 (ms) |
-| openDuration | number | Time for animation to open panel content | 300 (ms) |
+| closeDuration | number | Time, in milliseconds, for animation to close panel content | 300 |
+| openDuration | number | Time, in milliseconds, for animation to open panel content | 300  |
 
 #### scrolling
 
 | Option | Type | Description | Default |
 | ------ | ---- | ----------- | ------- |
 | active | boolean | Enabled/Disabled scrolling for the accordion | true |
-| duration | number | Scrolling duration | 300ms |
+| duration | number | Scrolling duration, in milliseconds | 300 |
 | scrollOnOpen | boolean | Activates scroll on opening ( default closing ) a panel | false |
 | scrollOnOpenMaximumScreenWidth? | number | In combination with scrollOnOpen. If Viewport width is heigher than parameter scrollOnOpen is deactivated | false |
 | topOffsetSelector? | string | Top offset element selector. Considers elements placed outside accordion stacking content. E.g. Fixed Header  | false |
@@ -146,12 +146,12 @@ Tab-View javascript inserted markup. Only if Tab-View is activated.
 ## Events
 #### animation
 
-| Event | Description | Element  |
-| ----- |-------- | ------------ |
+| Event | Description | Element  | Return |
+| ----- |-------- | ------------ | ----- |
 | before.init.accordion | Before plugin is initialized | accordion container |
 | after.init.accordion | After plugin has been initialized | accordion container |
 | before.open.panel.accordion | After a click on a link inside a closed panel. Before content container opens | panel container | 
-| after.open.panel.accordion | After a click on a link inside a closed panel. After content container opened | panel container | 
+| after.open.panel.accordion | After a click on a link inside a closed panel. After content container opened | panel container | {panel, position } |
 | before.close.panel.accordion | After a click on a link inside a opened panel. Before content container closes | panel container | 
 | after.close.panel.accordion | After a click on a link inside a opened panel. After content container closed | panel container | 
 
