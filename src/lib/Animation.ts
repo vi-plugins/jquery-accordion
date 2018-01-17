@@ -23,15 +23,15 @@ export default class Animation extends JQueryModuleBase {
 
 	protected checkDataAttributes(): void {
 
-		if (this.$element.data('auto-close')) {
+		if ( this.$element.attr('data-auto-close') ) {
 			this.options.autoClose = this.$element.data('auto-close');
 		}
 
-		if (this.$element.data('open-duration')) {
+		if (this.$element.attr('data-open-duration')) {
 			this.options.openDuration = this.$element.data('open-duration');
 		}
 
-		if (this.$element.data('close-duration')) {
+		if (this.$element.attr('data-close-duration')) {
 			this.options.closeDuration = this.$element.data('close-duration');
 		}
 
