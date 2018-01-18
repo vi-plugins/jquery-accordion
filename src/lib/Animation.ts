@@ -72,17 +72,19 @@ export default class Animation extends JQueryModuleBase {
 			$panel
 				.addClass('accordion__panel--open')
 				.removeClass('accordion__panel--opening')
-				.trigger('after.open.panel.accordion', {panel: $panel, position: this.getPanelPosition()});
+				.trigger('after.open.panel.accordion', {panel: $panel, position: this.getPanelPosition($panel)});
 				$content.removeAttr('style');
 		});
 	}
 
-	protected getPanelPosition(): number{
+	protected getPanelPosition($panel:JQuery): number{
 		let opened: number = null;
+
 		this.$element.find('.accordion__panel').each( (index, elem) => {
-			if ( $(elem).hasClass('accordion__panel--open') ) {
+
+			if ($panel.is($(elem))){
 				opened = index;
-				return
+				return false;
 			}
 		});
 		return opened;
