@@ -17,8 +17,11 @@ export default class Animation extends JQueryModuleBase {
 		});
 	}
 
-	protected setActivePanel(index: number):void {
-		this.$element.find('.accordion__panel').eq(index).addClass('accordion__panel--open');
+	protected setActivePanel(openedPanel: Array<number>):void {
+
+		for (let i=0; i<openedPanel.length; i++){
+			this.$element.find('.accordion__panel').eq(openedPanel[i]).addClass('accordion__panel--open');
+		}
 	}
 
 	protected checkDataAttributes(): void {
