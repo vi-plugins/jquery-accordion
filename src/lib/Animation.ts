@@ -95,14 +95,11 @@ export default class Animation extends JQueryModuleBase {
 			.trigger('before.close.panel.accordion', [$activePanel || null])
 			.addClass('accordion__panel--closing');
 
-		if( this.$element.data())
-
-
 		$content.slideUp(this.options.closeDuration, () => {
 			$panel
 				.removeClass('accordion__panel--open')
 				.removeClass('accordion__panel--closing')
-				.trigger('after.close.panel.accordion');
+				.trigger('after.close.panel.accordion', { panel: $panel, position: this.getPanelPosition($panel)});
 			$content.removeAttr('style');
 		});
 	}
