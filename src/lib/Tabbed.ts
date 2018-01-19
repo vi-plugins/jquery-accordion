@@ -114,6 +114,20 @@ export default class Animation extends JQueryModuleBase {
 		// remove all active tabs
 		this.$element.find('.viAccordion__tabsPanel').removeClass('viAccordion__tabsPanel--open');
 
+		this.$element.find('.accordion__panel').each((index, elem)=> {
+
+			let opened: boolean = false;
+
+			if ( $(elem).hasClass('accordion__panel--open') ){
+				opened = true;
+				$(elem).removeClass('accordion__panel--open');
+			}
+
+			if ( opened ){
+				$(elem).trigger('after.close.panel.accordion',{panel: $(event.target).parent(), position: index});
+			}
+		});
+
 		// remove all active accordion panels
 		this.$element.find('.viAccordion__panel').removeClass('viAccordion__panel--open');
 

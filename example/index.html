@@ -28,7 +28,7 @@
 		Header
 	</header>
 	<h3>Accordion - Default</h3>
-	<div class="viAccordion" data-auto-close="false">
+	<div class="viAccordion tabbed" data-auto-close="false">
 		<div class="viAccordion__panel">
 			<h3 class="viAccordion__title"><a href="#" class="viAccordion__titleLink">Panel 1</a></h3>
 			<div class="viAccordion__content">
@@ -86,7 +86,7 @@
 		$(document).ready(function() {
 			$('.viAccordion').viAccordion({
 		        animation: {
-		          openedPanelIndex: 2
+		          openedPanelIndex: [2]
 				},
                 tabbed: {
                     minViewportWidth: 700
@@ -97,6 +97,13 @@
                 }
 		    }).trigger('init.accordion');
 
+			$('.viAccordion').on('after.open.panel.accordion',function(e, value){
+			   console.log(value.position);
+			});
+
+			$('.viAccordion').on('after.close.panel.accordion',function(e, value){
+				console.log(value.position);
+			});
 		});
 
 	</script>

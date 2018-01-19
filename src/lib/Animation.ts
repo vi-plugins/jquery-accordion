@@ -17,8 +17,11 @@ export default class Animation extends JQueryModuleBase {
 		});
 	}
 
-	protected setActivePanel(index: number):void {
-		this.$element.find('.viAccordion__panel').eq(index).addClass('viAccordion__panel--open');
+	protected setActivePanel(openedPanel: Array<number>):void {
+
+		for (let i=0; i<openedPanel.length; i++){
+			this.$element.find('.viAccordion__panel').eq(openedPanel[i]).addClass('viAccordion__panel--open');
+		}
 	}
 
 	protected checkDataAttributes(): void {
@@ -69,17 +72,19 @@ export default class Animation extends JQueryModuleBase {
 			$panel
 				.addClass('viAccordion__panel--open')
 				.removeClass('viAccordion__panel--opening')
-				.trigger('after.open.panel.accordion', {panel: $panel, position: this.getPanelPosition()});
+				.trigger('after.open.panel.accordion', {panel: $panel, position: this.getPanelPosition($panel)});
 				$content.removeAttr('style');
 		});
 	}
 
-	protected getPanelPosition(): number{
+	protected getPanelPosition($panel:JQuery): number{
 		let opened: number = null;
+
 		this.$element.find('.viAccordion__panel').each( (index, elem) => {
-			if ( $(elem).hasClass('viAccordion__panel--open') ) {
+
+			if ($panel.is($(elem))){
 				opened = index;
-				return
+				return false;
 			}
 		});
 		return opened;
@@ -90,14 +95,11 @@ export default class Animation extends JQueryModuleBase {
 			.trigger('before.close.panel.accordion', [$activePanel || null])
 			.addClass('viAccordion__panel--closing');
 
-		if( this.$element.data())
-
-
 		$content.slideUp(this.options.closeDuration, () => {
 			$panel
 				.removeClass('viAccordion__panel--open')
 				.removeClass('viAccordion__panel--closing')
-				.trigger('after.close.panel.accordion');
+				.trigger('after.close.panel.accordion', { panel: $panel, position: this.getPanelPosition($panel)});
 			$content.removeAttr('style');
 		});
 	}
