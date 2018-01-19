@@ -34,7 +34,7 @@ export default class Animation extends JQueryModuleBase {
 			}, 250);
 		});
 
-		this.$element.find('.accordion__tabsTitleLink').on('click.panel.tabs.accordion', (e) => {
+		this.$element.find('.viAccordion__tabsTitleLink').on('click.panel.tabs.accordion', (e) => {
 			e.preventDefault();
 			this.toggleTabs($(e.currentTarget));
 		});
@@ -82,10 +82,10 @@ export default class Animation extends JQueryModuleBase {
 	protected renderTabs(): void {
 		// inserted markup
 		const insertedTabMarkup = {
-			parent: '<ul class="accordion__tabs"></ul>',
+			parent: '<ul class="viAccordion__tabs"></ul>',
 			child: `
-				<li class="accordion__tabsPanel">
-					<a class="accordion__tabsTitleLink"></a>
+				<li class="viAccordion__tabsPanel">
+					<a class="viAccordion__tabsTitleLink"></a>
 				</li>`
 		};
 
@@ -93,36 +93,36 @@ export default class Animation extends JQueryModuleBase {
 		this.$element.prepend(insertedTabMarkup.parent);
 
 		// create list item from accordion items
-		this.$element.find('.accordion__titleLink').each((index, elem) => {
+		this.$element.find('.viAccordion__titleLink').each((index, elem) => {
 
 			// append child markup
-			this.$element.find('.accordion__tabs').append(insertedTabMarkup.child);
+			this.$element.find('.viAccordion__tabs').append(insertedTabMarkup.child);
 
 			// set active tab
-			if ($(elem).parents('.accordion__panel').is('[class*=--open]')) {
-				this.$element.find('.accordion__tabsPanel').eq(index).addClass('accordion__tabsPanel--open');
+			if ($(elem).parents('.viAccordion__panel').is('[class*=--open]')) {
+				this.$element.find('.viAccordion__tabsPanel').eq(index).addClass('viAccordion__tabsPanel--open');
 			}
 
 			// fill child markup with text from accordion titleLink
-			this.$element.find('.accordion__tabsTitleLink').eq(index).append($(elem).html());
+			this.$element.find('.viAccordion__tabsTitleLink').eq(index).append($(elem).html());
 		});
 	}
 
 	protected toggleTabs($elem: JQuery): void {
-		let activeTabIndex = $elem.parents('.accordion__tabsPanel').index();
+		let activeTabIndex = $elem.parents('.viAccordion__tabsPanel').index();
 
 		// remove all active tabs
-		this.$element.find('.accordion__tabsPanel').removeClass('accordion__tabsPanel--open');
+		this.$element.find('.viAccordion__tabsPanel').removeClass('viAccordion__tabsPanel--open');
 
 		// remove all active accordion panels
-		this.$element.find('.accordion__panel').removeClass('accordion__panel--open');
+		this.$element.find('.viAccordion__panel').removeClass('viAccordion__panel--open');
 
 		// set new active tab
-		$elem.parents('.accordion__tabsPanel').addClass('accordion__tabsPanel--open');
+		$elem.parents('.viAccordion__tabsPanel').addClass('viAccordion__tabsPanel--open');
 
 		// set new active accordion panel and trigger event
-		this.$element.find('.accordion__panel').eq(activeTabIndex)
-			.addClass('accordion__panel--open')
+		this.$element.find('.viAccordion__panel').eq(activeTabIndex)
+			.addClass('viAccordion__panel--open')
 			.trigger('after.open.panel.accordion',{panel: $(event.target).parent() ,position: activeTabIndex});
 	}
 
@@ -132,7 +132,7 @@ export default class Animation extends JQueryModuleBase {
 			let tabsWidth: number = 0;
 			let fits: boolean = true;
 
-			this.$element.find('.accordion__tabsPanel').each((index, elem) => {
+			this.$element.find('.viAccordion__tabsPanel').each((index, elem) => {
 
 				tabsWidth = tabsWidth + $(elem).outerWidth();
 				if (tabsWidth >= contentWidth) {
@@ -144,33 +144,33 @@ export default class Animation extends JQueryModuleBase {
 	}
 
 	protected showTabs(): void {
-		let $accordionOpenedPanels: JQuery = this.$element.find('.accordion__panel--open');
+		let $accordionOpenedPanels: JQuery = this.$element.find('.viAccordion__panel--open');
 		let activePanelIndex: number = $accordionOpenedPanels.index() - 1;
 
 		if ($accordionOpenedPanels.length > 1) {
 			// accordion has more than one panel opened. Remove open classes from every opened panels except first found
-			$accordionOpenedPanels.slice(1).removeClass('accordion__panel--open');
+			$accordionOpenedPanels.slice(1).removeClass('viAccordion__panel--open');
 
 		} else if ($accordionOpenedPanels.length < 1) {
 
 			// accordion has no opened panels. set first tab as opened
 			activePanelIndex = 0;
 
-			this.$element.find('.accordion__panel').eq(activePanelIndex)
-				.addClass('accordion__panel--open');
+			this.$element.find('.viAccordion__panel').eq(activePanelIndex)
+				.addClass('viAccordion__panel--open');
 		}
 
 		// remove all active tabs panels
-		this.$element.find('.accordion__tabsPanel').removeClass('accordion__tabsPanel--open');
+		this.$element.find('.viAccordion__tabsPanel').removeClass('viAccordion__tabsPanel--open');
 
 		// set new active tab panel
-		this.$element.find('.accordion__tabsPanel').eq(activePanelIndex).addClass('accordion__tabsPanel--open');
+		this.$element.find('.viAccordion__tabsPanel').eq(activePanelIndex).addClass('viAccordion__tabsPanel--open');
 
 		// display tabs element
 		this.$element.addClass('tabs');
 
 		//hide accordion panels titles
-		this.$element.find('.accordion__panel').find('.accordion__title').css('display', 'none');
+		this.$element.find('.viAccordion__panel').find('.viAccordion__title').css('display', 'none');
 	}
 
 	protected hideTabs(): void {
@@ -178,10 +178,10 @@ export default class Animation extends JQueryModuleBase {
 		this.$element.removeClass('tabs');
 
 		//show accordion panels
-		this.$element.find('.accordion__panel').find('.accordion__title').css('display', 'block');
+		this.$element.find('.viAccordion__panel').find('.viAccordion__title').css('display', 'block');
 	}
 
 	destroy(): void {
-		this.$element.find('.accordion__tabsTitleLink').off('click.panel.tabs.accordion');
+		this.$element.find('.viAccordion__tabsTitleLink').off('click.panel.tabs.accordion');
 	}
 }

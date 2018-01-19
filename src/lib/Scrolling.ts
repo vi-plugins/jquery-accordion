@@ -35,13 +35,13 @@ export default class Scrolling extends JQueryModuleBase {
 		let openedContentHeight: number = 0;
 		let elementsBeforeHeight: number = 0;
 
-		if ($activePanel.prevAll('.accordion__panel--open').length > 0) {
+		if ($activePanel.prevAll('.viAccordion__panel--open').length > 0) {
 
-			$activePanel.prevUntil('.accordion__panel--open').each((index, elem) => {
+			$activePanel.prevUntil('.viAccordion__panel--open').each((index, elem) => {
 				elementsBeforeHeight = elementsBeforeHeight + $(elem).outerHeight(true);
 			});
 
-			openedContentHeight = $activePanel.prevAll('.accordion__panel--open').find('.accordion__content').outerHeight();
+			openedContentHeight = $activePanel.prevAll('.viAccordion__panel--open').find('.viAccordion__content').outerHeight();
 		}
 
 		let scrollTopPosition:number = this.getScrollTopPosition($activePanel);

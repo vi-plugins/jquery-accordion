@@ -81,11 +81,11 @@ import './scss/accordion.scss';
 	}
 
 	/** Attach plugin to jQuery fn namespace */
-	$.fn[Plugin.NAME] = function (options: any) {
+	$.fn.viAccordion = function (options: any) {
 		return this.each(function () {
 			let $this = $(this);
-			if (!$this.data(Plugin.NAME)) {
-				$this.data(Plugin.NAME, new Plugin(this, options));
+			if (!$this.data('viAccordion')) {
+				$this.data('viAccordion', new Plugin(this, options));
 			}
 		});
 	};

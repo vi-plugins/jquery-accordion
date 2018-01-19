@@ -1,4 +1,4 @@
-.accordion {
+.viAccordion {
 
 	&__panel {
 		position: relative;
@@ -10,7 +10,7 @@
 		}
 
 		&--open {
-			.accordion__content {
+			.viAccordion__content {
 				display: block;
 			}
 		}
@@ -63,7 +63,7 @@
 	}
 
 	&.tabs {
-		.accordion__tabs {
+		.viAccordion__tabs {
 			position: relative;
 			visibility: visible;
 		}
