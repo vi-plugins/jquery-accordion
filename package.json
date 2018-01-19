@@ -1,6 +1,6 @@
 {
 	"name": "jquery-accordion",
-	"version": "0.4.7",
+	"version": "0.5.3",
 	"description": "A TypeScript accordion plugin",
 	"main": "dist/accordion.min.js",
 	"module": "src/index.ts",
