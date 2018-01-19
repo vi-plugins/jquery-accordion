@@ -28,7 +28,7 @@
 		Header
 	</header>
 	<h3>Accordion - Default</h3>
-	<div class="accordion" data-auto-close="false">
+	<div class="accordion tabbed" data-auto-close="false">
 		<div class="accordion__panel">
 			<h3 class="accordion__title"><a href="#" class="accordion__titleLink">Panel 1</a></h3>
 			<div class="accordion__content">
@@ -104,7 +104,6 @@
 			$('.accordion').on('after.close.panel.accordion',function(e, value){
 				console.log(value.position);
 			});
-
 		});
 
 	</script>
