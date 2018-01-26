@@ -36,7 +36,7 @@ export default class Animation extends JQueryModuleBase {
 
 		this.$element.find('.accordion__tabsTitleLink').on('click.panel.tabs.accordion', (e) => {
 			e.preventDefault();
-			this.toggleTabs($(e.currentTarget));
+			this.toggleTabs(e);
 		});
 	}
 
@@ -108,7 +108,10 @@ export default class Animation extends JQueryModuleBase {
 		});
 	}
 
-	protected toggleTabs($elem: JQuery): void {
+	protected toggleTabs(event:JQueryEventObject): void {
+
+		let $elem: JQuery = $(event.currentTarget);
+
 		let activeTabIndex = $elem.parents('.accordion__tabsPanel').index();
 
 		// remove all active tabs
@@ -127,6 +130,7 @@ export default class Animation extends JQueryModuleBase {
 				$(elem).trigger('after.close.panel.accordion',{panel: $(event.target).parent(), position: index});
 			}
 		});
+
 
 		// remove all active accordion panels
 		this.$element.find('.accordion__panel').removeClass('accordion__panel--open');
